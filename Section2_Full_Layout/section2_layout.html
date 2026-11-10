@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Museum of Theft · Section 2 · What Can Be Taken? · Full layout mock-up</title>
+<style>
+  @font-face { font-family: "Diplomata SC"; src: url("assets/fonts/Diplomata_SC.ttf"); }
+  @font-face { font-family: "Unna"; src: url("assets/fonts/Unna.ttf"); }
+  @font-face { font-family: "Unna"; font-style: italic; src: url("assets/fonts/Unna_Italics.ttf"); }
+  @font-face { font-family: "League Spartan"; src: url("assets/fonts/League_Spartan.ttf"); }
+  @font-face { font-family: "Montserrat"; font-weight: 400; src: url("assets/fonts/Montserrat.ttf"); }
+  @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/fonts/Montserrat_Semi-Bold.ttf"); }
+  @font-face { font-family: "Montserrat"; font-weight: 700; src: url("assets/fonts/Montserrat_Bold.ttf"); }
+  @font-face { font-family: "Poppins"; font-weight: 400; src: url("assets/fonts/Poppins.ttf"); }
+  @font-face { font-family: "Poppins"; font-weight: 700; src: url("assets/fonts/Poppins_Bold.ttf"); }
+  @font-face { font-family: "DM Sans"; font-weight: 400; src: url("assets/fonts/DM_Sans.ttf"); }
+  @font-face { font-family: "DM Sans"; font-weight: 700; src: url("assets/fonts/DM_Sans_Bold.ttf"); }
+
+  /* 1rem = 1 cm at real size (40 px per cm). Views are scaled with transform. */
+  html { font-size: 40px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f1ea; font-family: "Segoe UI", Arial, sans-serif; color: #222; }
+  .abs { position: absolute; }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+  .shadow { box-shadow: .12rem .18rem .35rem rgba(0,0,0,.35); }
+
+  .board { position: relative; width: 120rem; height: 90rem;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(0,0,0,.06) 0 .08rem, transparent .09rem) 0 0/.7rem .7rem,
+      radial-gradient(circle at 70% 60%, rgba(255,255,255,.08) 0 .06rem, transparent .07rem) 0 0/.5rem .5rem,
+      #b98c5d;
+    border: .9rem solid #5a4330; box-sizing: content-box; }
+  .dark { background: #1f262e; color: #efe6d2; }
+  .kicker { font-size: .39rem; letter-spacing: .08rem; text-transform: uppercase; font-weight: 600; }
+  .note-ph { position:absolute; font-size:.3rem; color:#a33; background:rgba(255,255,255,.88);
+    padding:.05rem .15rem; border:.03rem solid #a33; font-family:"Segoe UI",Arial; font-style:normal; font-weight:400; letter-spacing:0; }
+
+  /* ---------- RUBBER · Victorian (Claus Toys template) ---------- */
+  .vic { background: linear-gradient(160deg,#f6efdf 0%,#f1e8d4 60%,#ebdfc6 100%); font-family: "Unna", Georgia, serif; color:#2b2a26; }
+  .vic-frame { outline: .06rem solid #2f4a3a; outline-offset: -.45rem; }
+  .vic-frame2 { box-shadow: inset 0 0 0 .55rem transparent, inset 0 0 0 .6rem #c08a4f; }
+  .orn { background: url("assets/ornament_band.png") repeat-x center/auto 100%; }
+  .dip { font-family: "Diplomata SC", Georgia, serif; color: #2f4a3a; letter-spacing: .01rem; }
+  .vic .kick { font-family:"Unna",serif; font-size:.42rem; letter-spacing:.16rem; text-transform:uppercase; color:#8a5a2e; }
+  .vic p { font-size: .66rem; line-height: 1.42; margin-bottom: .42rem; }
+  .vic .lt { font-weight: 700; font-size: .52rem; line-height: 1.25; font-family:"Unna",serif; }
+  .vic .lm { font-size: .42rem; color: #8a5a2e; margin: .1rem 0 .16rem; font-style: italic; letter-spacing:.02rem; }
+  .vic .ld { font-size: .5rem; line-height: 1.32; }
+
+  /* ---------- HAVASUPAI · Permission slip (Boy Scouts template) ---------- */
+  .scout { background: #fdf6e3; font-family: "Montserrat", Arial, sans-serif; color: #33303d; }
+  .spartan { font-family: "League Spartan", "Montserrat", Arial, sans-serif; font-weight: 700; color:#33303d; letter-spacing:.01rem; }
+  .khaki { background: #b6a883; }
+  .scout p { font-size: .57rem; line-height: 1.48; margin-bottom: .38rem; }
+  .scout .lt { font-family:"Montserrat"; font-weight: 700; font-size: .44rem; line-height: 1.3; }
+  .scout .lm { font-size: .36rem; color: #8a7a4e; margin: .1rem 0 .16rem; font-weight:600; }
+  .scout .ld { font-size: .46rem; line-height: 1.38; }
+  .scout .cap { font-family:"Montserrat"; font-weight:700; font-size:.34rem; letter-spacing:.08rem; text-transform:uppercase; color:#8a7a4e; }
+
+  /* ---------- CLEARVIEW · Content table (Rimberio template) ---------- */
+  .feed { background: #fbf6f2; font-family: "DM Sans", Arial, sans-serif; color: #241a15; }
+  .tan { background: #d5b7a3; }
+  .pop { font-family: "Poppins", Arial, sans-serif; font-weight: 700; color: #241a15; line-height:1.05; }
+  .feed p { font-size: .56rem; line-height: 1.45; margin-bottom: .36rem; }
+  .feed .lt { font-family:"Poppins"; font-weight:700; font-size:.44rem; line-height:1.25; }
+  .feed .lm { font-size:.36rem; color:#9b5a3c; margin:.08rem 0 .14rem; }
+  .feed .ld { font-size:.42rem; line-height:1.38; }
+  .dots { background: radial-gradient(circle, #8b4a2b 0 .17rem, transparent .18rem) 0 0/.75rem .75rem; }
+
+  /* ---------- views ---------- */
+  .view { position: relative; overflow: hidden; background: #f4f1ea; }
+  .stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+  .vcap { font-size: 18px; padding: 10px 16px; font-weight: 600; color:#333; }
+  .dim { position:absolute; font-size:1.1rem; color:#333; font-family:"Segoe UI",Arial; }
+  .anno { position:absolute; background:#c0392b; color:#fff; border-radius:.8rem; min-width:1.6rem; height:1.6rem; padding:0 .3rem;
+    font-size:.75rem; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:"Segoe UI",Arial;
+    box-shadow:0 .05rem .15rem rgba(0,0,0,.4); z-index:5; }
+  .dnote { position:absolute; font-size:.38rem; color:#3a2a1a; line-height:1.35; font-family:"Segoe UI",Arial; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+const R = 40; // px per cm at stage scale 1
+
+/* ============================================================
+   TEXT
+   ============================================================ */
+const SECTION_INTRO = [
+  "Most theft is easy to recognise. Something leaves its owner without permission, and the owner no longer has it. The three cases here are harder. In each, something small moved: seeds from a forest, blood from a village, photos from the internet. Yet it is hard to say what the owner lost. Brazil kept its rubber trees. The donors gave their blood willingly. The original photos stayed online.",
+  "What changed was what each thing became: plantations on another continent, data for studies the donors say they never agreed to, a search engine for faces. Those who call these cases theft point to what the thing became, not only to what moved.",
+  "The cases span 150 years, from the age of empire to the age of the internet. Each panel sets out what happened, who calls it theft and why, and how the other side answers."
+];
+
+// Story 1 — unchanged from the approved Rubber layout
+const RUB_P1 = "In 1876, Henry Wickham, an Englishman living in the Amazon, shipped about 70,000 rubber seeds to Kew Gardens in London, paid by Britain’s India Office. By his own later account, he told customs they were “exceedingly delicate botanical specimens”. Brazil was then the world’s main source of rubber. The seedlings went on to British Asia. For twenty years little changed; then plantation labour, investment and the demand for bicycle and car tyres turned them into an industry. By 1913 Asian plantations had overtaken the Amazon, and Brazil’s rubber boom ended. Kerala’s rubber trees descend largely from the same seeds.";
+const RUB_P2 = "In Brazil, Wickham is remembered as “the father of bio-piracy”: someone who profited from Brazil’s plants without its consent. Wickham called it patriotism. No Brazilian law in 1876 banned taking the seeds, Brazil kept its trees, and the plantations took decades of work to succeed. Britain knighted him in 1920.";
+
+// Story 2 — Phase 4 text; one fix in the last paragraph
+const HAV_P = [
+  "The Havasupai are a Native American tribe of about 650 people, living deep in the Grand Canyon. From 1990, researchers from Arizona State University (ASU) collected blood from more than 200 members. Tribal leaders were told the study was about diabetes; the written consent form spoke more broadly, of “behavioral/medical disorders”.",
+  "The samples were used in 23 papers and dissertations. Fifteen had nothing to do with diabetes; they covered schizophrenia, inbreeding and the tribe’s origins. One suggested its ancestors came from Asia, while the tribe’s own history says they began in the canyon. Tribal council member Carletta Tilousi said: “people got degrees and grants, and they never asked our permission.”",
+  "The lead researcher defended the work as ethical: science often advances through studies not tied to one disease. In 2010, ASU’s governing board settled. It paid $700,000 to 41 tribe members, returned the samples and apologised. No court ever ruled on whether the research broke the law. The blood went home. The published papers did not."
+];
+
+// Story 3 — Phase 4 text, unchanged
+const CLV_P = [
+  "Clearview AI, an American company founded in 2017, copies publicly posted photos from social media, news sites and other websites, without telling the people in them. Its software turns each face into a faceprint, a list of numbers describing its geometry. One uploaded photo can then find other photos of the same face online. By its own count, it holds more than 100 billion images, and it sells searches mainly to police and government agencies.",
+  "Regulators in Canada, Australia and several European countries found it broke their privacy laws. Canada’s privacy commissioner said: “What Clearview does is mass surveillance and it is illegal.” Illinois law draws its line at the faceprint: it protects scans of face geometry, but not photographs.",
+  "Clearview’s co-founder, Hoan Ton-That, said: “All the data inside Clearview AI is publicly available, as it is with Google.” The company says police use it to identify suspects and abused children. It admits no wrongdoing, and has not paid several European fines."
+];
+
+const TIMELINE = [
+  {y:1876, t:"1876", d:"Wickham’s 70,000 seeds leave Brazil. No law forbids it.", ly:4.0},
+  {y:1884, t:"1884", d:"Amazonas puts high export duties on rubber seeds.", ly:7.8},
+  {y:1895, t:"1890s", d:"First commercial rubber plantings in Malaya.", ly:12.6},
+  {y:1912, t:"1912", d:"Brazil passes the Rubber Defence Law.", ly:19.5},
+  {y:1913, t:"1913", d:"Asian plantations overtake the Amazon.", ly:21.5},
+  {y:1918, t:"1918", d:"Brazil bans the export of rubber seeds.", ly:23.5},
+  {y:1920, t:"1920", d:"Wickham is knighted in Britain.", ly:25.5},
+];
+
+/* ============================================================
+   SHARED HELPERS
+   ============================================================ */
+function qrBlock(size, seed) {
+  let s = seed || 12345, cells = "";
+  const n = 21, c = size/n;
+  const rnd = () => (s = (s*16807) % 2147483647) / 2147483647;
+  for (let i=0;i<n;i++) for (let j=0;j<n;j++) {
+    const finder = (i<7&&j<7)||(i<7&&j>13)||(i>13&&j<7);
+    let on;
+    if (finder) { const ii=i>13?i-14:i, jj=j>13?j-14:j;
+      on = (ii==0||ii==6||jj==0||jj==6)||(ii>=2&&ii<=4&&jj>=2&&jj<=4); }
+    else on = rnd()>0.52;
+    if (on) cells += `<rect x="${j*c}" y="${i*c}" width="${c+.01}" height="${c+.01}"/>`;
+  }
+  return `<svg viewBox="0 0 ${size} ${size}" width="${size}rem" height="${size}rem"><rect width="${size}" height="${size}" fill="#fff"/><g fill="#111">${cells}</g></svg>`;
+}
+function greyLines(n, w, gap, h, col) {
+  let out = ""; for (let i=0;i<n;i++) out += `<div style="height:${h}rem;margin-bottom:${gap}rem;width:${(i%5==4? w*0.6 : w)}%;background:${col||'rgba(60,50,40,.28)'}"></div>`;
+  return out;
+}
+function tag(n, x, y) { return `<div class="anno" style="left:${x}rem;top:${y}rem">${n}</div>`; }
+function personSil(fill, x, y, h) { // simple head-and-shoulders silhouette for photo placeholders
+  return `<svg class="abs" style="left:${x}rem;top:${y}rem;width:${h*0.9}rem;height:${h}rem" viewBox="0 0 90 100">
+    <circle cx="45" cy="34" r="19" fill="${fill}"/><path d="M8 100 Q10 62 45 60 Q80 62 82 100 Z" fill="${fill}"/></svg>`;
+}
+
+/* ============================================================
+   STORY 1 · RUBBER  (approved layout + Victorian template touches)
+   ============================================================ */
+const P = (pts) => pts.map(([lo,la]) => `${(lo+85).toFixed(1)},${(60-la).toFixed(1)}`).join(" ");
+const LAND = [
+  [[-77,8],[-72,12],[-62,11],[-52,5],[-50,0],[-44,-2],[-35,-5],[-35,-9],[-39,-15],[-41,-22],[-48,-26],[-49,-30],[-72,-30],[-71,-25],[-70,-18],[-76,-14],[-81,-6],[-80,-2],[-80,1],[-77,4]],
+  [[-77,8],[-80,9],[-83,9],[-85,11],[-85,14],[-83,15],[-80,10]],
+  [[-85,30],[-82,26],[-80,26],[-81,31],[-76,35],[-74,40],[-70,42],[-66,44],[-60,46],[-53,47],[-56,52],[-60,55],[-64,60],[-85,60]],
+  [[-17,15],[-17,21],[-13,28],[-6,36],[10,37],[11,33],[20,31],[32,31],[34,28],[43,12],[51,12],[44,-2],[40,-10],[40,-16],[35,-24],[33,-30],[16,-30],[12,-17],[13,-8],[9,-1],[9,4],[5,6],[-4,5],[-8,4],[-13,8]],
+  [[44,-25],[47,-25],[50,-15],[49,-12],[44,-17]],
+  [[-9,37],[-9,43],[-2,43.5],[-1,46],[-4.5,48],[2,51],[5,53],[8,54],[8.5,57],[12,56],[14,54],[20,54.5],[24,57],[23,60],[40,60],[40,45],[30,45],[28,41],[26,40],[23,36.5],[21,38],[19,42],[14,45],[12.5,44],[16,40],[18,40],[16,38],[12,38],[13,41],[10,44],[7,43.5],[3,43],[0,39],[-2,37]],
+  [[-5.5,50],[1.5,51],[1.7,52.8],[0,54],[-1.5,55.5],[-2,57.5],[-4,58.6],[-5.5,57.5],[-5,55],[-3,54],[-3.2,53.3],[-4.6,52.8],[-5,51.7],[-3,51.4]],
+  [[-6,52],[-6,54.5],[-8,55.3],[-10,54],[-10,51.8]],
+  [[26,40],[28,41],[30,45],[40,45],[40,60],[115,60],[115,23],[110,20],[108,16],[109,12],[105,9],[103,10],[100,13],[99,8],[100,6],[103,1.5],[104,1.3],[102,3],[100.5,4.5],[98.5,8],[98,16],[94,17],[92,22],[88,22],[86,20],[80,15],[80,10],[77,8],[76,10],[73,16],[72,21],[68,24],[62,25],[57,26],[56,24],[59,22],[52,17],[44,12],[43,15],[39,21],[35,28],[34,28],[35,36],[36,36.5],[30,36.5],[27,37]],
+  [[79.8,6],[80,9.8],[81.3,8.5],[81.8,7],[80.6,5.9]],
+  [[95,5.5],[98,4],[104,-2],[106,-6],[102,-4],[99,0],[95.5,3]],
+  [[109,1],[110,2],[113,3.5],[115,5],[115,-4],[110,-3]],
+];
+const SEED_ROUTE = [[-55.2,-2.9],[-54.7,-2.4],[-48.5,-1.4],[-40,8],[-25,28],[-12,45],[-3,53.4]];
+const SEEDLING_ROUTE = [[-0.3,51.5],[-4,49],[-9.5,44],[-9.5,38],[-5.6,36],[5,37.5],[20,34],[32.3,31.3],[33,28],[38,21],[43.3,12.6],[52,12.5],[65,9],[79.8,6.9]];
+const MALAYA_ROUTE = [[79.8,6.9],[86,5],[95,6],[99,4],[103.8,1.3]];
+const PLACES = [
+  {n:"Tapajós river", lo:-55.2, la:-2.9, dx:-1, dy:5, a:"end"},
+  {n:"Belém", lo:-48.5, la:-1.4, dx:2, dy:-1.5, a:"start"},
+  {n:"Liverpool", lo:-3, la:53.4, dx:-2, dy:-1.5, a:"end"},
+  {n:"Kew Gardens", lo:-0.3, la:51.5, dx:2.2, dy:3, a:"start"},
+  {n:"Ceylon", lo:80.6, la:7.5, dx:-2, dy:5.5, a:"middle"},
+  {n:"Malaya (Singapore)", lo:103.8, la:1.3, dx:1.5, dy:5.2, a:"end"},
+];
+function rubberMap() {
+  const land = LAND.map(p => `<polygon points="${P(p)}" fill="#e3d4b0" stroke="#a8875a" stroke-width=".35"/>`).join("");
+  const route = (pts, col, dash) => `<polyline points="${P(pts)}" fill="none" stroke="${col}" stroke-width="1.1" ${dash?'stroke-dasharray="2.4 1.6"':''} stroke-linecap="round" stroke-linejoin="round"/>`;
+  const places = PLACES.map(p => { const x=p.lo+85, y=60-p.la;
+    return `<circle cx="${x}" cy="${y}" r="1.25" fill="#2f4a3a" stroke="#fff" stroke-width=".4"/>
+      <text x="${x+p.dx}" y="${y+p.dy}" font-size="3.8" text-anchor="${p.a}" font-family="Unna, Georgia" font-weight="700" fill="#22332a">${p.n}</text>`; }).join("");
+  // compass rose (Victorian touch)
+  const rose = `<g transform="translate(186,80)"><circle r="6" fill="none" stroke="#8a5a2e" stroke-width=".3"/>
+      <path d="M0,-7 L1.3,0 L0,7 L-1.3,0 Z" fill="#2f4a3a"/><path d="M-7,0 L0,1.3 L7,0 L0,-1.3 Z" fill="#8a5a2e"/>
+      <text y="-8" font-size="3" text-anchor="middle" font-family="Diplomata SC" fill="#2f4a3a">N</text></g>`;
+  return `<svg viewBox="0 0 200 90" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+    <rect width="200" height="90" fill="#cfdcd6"/>${land}
+    <text x="40" y="35" font-size="4.2" fill="#6f8a85" font-style="italic" font-family="Unna">Atlantic Ocean</text>
+    <text x="148" y="72" font-size="4.2" fill="#6f8a85" font-style="italic" font-family="Unna">Indian Ocean</text>
+    ${route(SEED_ROUTE,"#8a5a2e",true)}${route(SEEDLING_ROUTE,"#2f4a3a",false)}${route(MALAYA_ROUTE,"#2f4a3a",false)}${places}${rose}
+  </svg>`;
+}
+
+function rubberColumn(X) {
+  const tl = TIMELINE.map(e => {
+    const ty = 4.5 + (e.y-1876)*0.466;
+    return `
+      <div class="abs" style="left:2.2rem;top:${ty-.05}rem;width:.9rem;height:.1rem;background:#2f4a3a"></div>
+      <svg class="abs" style="left:3.1rem;top:0;width:1.2rem;height:29.7rem;overflow:visible" viewBox="0 0 1.2 29.7">
+        <line x1="0" y1="${ty}" x2="1.1" y2="${e.ly+.32}" stroke="#8a5a2e" stroke-width=".04"/></svg>
+      <div class="abs" style="left:4.4rem;top:${e.ly}rem;width:10.2rem">
+        <div class="dip" style="font-size:.6rem;line-height:1">${e.t}</div>
+        <div style="font-size:.5rem;line-height:1.25;margin-top:.08rem">${e.d}</div></div>`;
+  }).join("");
+  return `
+    <!-- R1 STORY PANEL (A4 portrait) -->
+    <div class="abs vic shadow vic-frame" style="left:${X+1}rem;top:11.5rem;width:21rem;height:29.7rem;padding:1.15rem 1.5rem">
+      <div class="orn" style="height:1.05rem;margin:0 -.6rem .5rem"></div>
+      <div class="kick">Section 2 · Story 1</div>
+      <div class="dip" style="font-size:.86rem;line-height:1.25;margin:.2rem 0 .2rem">Seventy Thousand<br>Seeds</div>
+      <div style="font-size:.5rem;font-style:italic;color:#8a5a2e;margin-bottom:.5rem;padding-bottom:.4rem;border-bottom:.04rem solid #c08a4f;letter-spacing:.02rem">Henry Wickham · the Amazon to Kew Gardens, London · 1876</div>
+      <p>${RUB_P1}</p>
+      <p>${RUB_P2}</p>
+      <div class="abs" style="left:1.5rem;right:1.5rem;bottom:1.15rem;border-top:.05rem double #2f4a3a;padding-top:.4rem;font-size:.8rem;line-height:1.25;color:#2f4a3a">
+        Brazil kept its rubber trees.<br><b>What, if anything, did Britain take?</b></div>
+    </div>
+
+    <!-- R2 TIMELINE -->
+    <div class="abs vic shadow vic-frame" style="left:${X+23.5}rem;top:11.5rem;width:15.5rem;height:29.7rem">
+      <div class="orn abs" style="left:.7rem;right:.7rem;top:.65rem;height:.72rem"></div>
+      <div class="abs" style="left:1rem;top:1.6rem;right:.8rem">
+        <div class="dip" style="font-size:.56rem;line-height:1.1">It took decades</div>
+        <div style="font-size:.4rem;color:#8a5a2e;margin-top:.12rem;font-style:italic">1876–1920, drawn to scale</div>
+      </div>
+      <div class="abs" style="left:2.6rem;top:4.5rem;width:.12rem;height:20.5rem;background:#2f4a3a"></div>
+      <div class="abs" style="left:1.3rem;top:8.23rem;width:1rem;height:13.04rem;border-left:.06rem solid #c08a4f;border-top:.06rem solid #c08a4f;border-bottom:.06rem solid #c08a4f"></div>
+      <div class="abs" style="left:.25rem;top:12.6rem;font-size:.46rem;color:#8a5a2e;font-style:italic;writing-mode:vertical-rl;transform:rotate(180deg)">28 quiet years</div>
+      ${tl}
+      <div class="abs" style="left:4.4rem;top:16.2rem;width:10.2rem;font-size:.5rem;font-style:italic;color:#8a5a2e;line-height:1.25">Twenty years after the seeds left, Brazil is still the world’s main source of rubber.</div>
+      <div class="abs" style="left:1rem;bottom:.75rem;font-size:.36rem;color:#8a7a62;font-style:italic">Timeline · Made for this exhibition</div>
+    </div>
+
+    <!-- R3 BRITAIN'S VERDICT -->
+    <div class="abs vic shadow vic-frame2" style="left:${X+1}rem;top:43rem;width:18.5rem;height:19rem;padding:1rem">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:.05rem solid #2f4a3a;padding-bottom:.2rem">
+        <div class="kick" style="color:#2f4a3a">Britain’s verdict</div>
+        <div class="dip" style="font-size:.56rem">1920</div></div>
+      <div style="position:relative;margin-top:.45rem;height:8.6rem;background:#fbf8f0;border:.03rem solid #bbb;padding:.5rem .7rem">
+        <div class="serif" style="text-align:center;font-size:.62rem;font-weight:700">The London Gazette</div>
+        <div style="text-align:center;font-size:.26rem;margin:.05rem 0 .3rem;letter-spacing:.05rem">SUPPLEMENT</div>
+        ${greyLines(3,100,.14,.13)}
+        <div class="serif" style="background:#f3e3a6;padding:.18rem .25rem;margin:.18rem 0;font-size:.36rem;line-height:1.3">Henry Alexander Wickham, Esq.<br><i>For services in connection with the rubber plantation industry in the Far East.</i></div>
+        ${greyLines(3,100,.14,.13)}
+        <div class="note-ph" style="right:.2rem;bottom:.15rem">PLACEHOLDER · print the real scan from thegazette.co.uk</div>
+      </div>
+      <div style="margin-top:.45rem">
+        <div class="lt">“For services in connection with the rubber plantation industry in the Far East”</div>
+        <div class="lm">1920 · Knighthood citation, London Gazette · Reproduction</div>
+        <div class="ld">Britain’s verdict: the 1920 citation knighting Wickham, which does not mention Brazil.</div>
+      </div>
+    </div>
+
+    <!-- R4 BRAZIL'S VERDICT -->
+    <div class="abs vic shadow vic-frame2" style="left:${X+20.5}rem;top:43rem;width:18.5rem;height:19rem;padding:1rem">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:.05rem solid #2f4a3a;padding-bottom:.2rem">
+        <div class="kick" style="color:#2f4a3a">Brazil’s verdict</div>
+        <div class="dip" style="font-size:.56rem">2009</div></div>
+      <div style="position:relative;margin-top:.45rem;height:8.6rem;background:#fff;border:.03rem solid #bbb;padding:.5rem .7rem;font-family:'Segoe UI',Arial">
+        <div style="font-size:.3rem;font-weight:800;letter-spacing:.06rem;color:#b03a2e">PESQUISA FAPESP · Nº 158</div>
+        <div class="serif" style="font-size:.6rem;font-weight:700;margin:.1rem 0 .25rem">As sementes da discórdia</div>
+        <div style="display:flex;gap:.4rem">
+          <div style="flex:1;background:#f3e3a6;padding:.15rem .2rem;font-size:.3rem;height:3.3rem">[Chosen extract, in Portuguese]</div>
+          <div style="flex:1;background:#eef2e6;padding:.15rem .2rem;font-size:.3rem;height:3.3rem">[English translation of the same extract]</div>
+        </div>
+        <div style="margin-top:.25rem">${greyLines(3,100,.14,.13)}</div>
+        <div class="note-ph" style="right:.2rem;bottom:.15rem">PLACEHOLDER · pick the passage from the article</div>
+      </div>
+      <div style="margin-top:.45rem">
+        <div class="lt">“As sementes da discórdia” (The seeds of discord)</div>
+        <div class="lm">April 2009 · Pesquisa FAPESP, Brazil · Extract in Portuguese and English</div>
+        <div class="ld">Brazil’s verdict: a Brazilian research magazine on the long debate over whether Wickham was a thief or a man of his time.</div>
+      </div>
+    </div>
+
+    <!-- R5 MAP -->
+    <div class="abs vic shadow vic-frame" style="left:${X+1}rem;top:64rem;width:29.7rem;height:21rem;padding:.9rem 1.1rem">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <div class="dip" style="font-size:.66rem">From the Tapajós to Asia</div>
+        <div style="font-size:.42rem;color:#8a5a2e;font-style:italic">1876 to the 1890s</div></div>
+      <div style="height:13.3rem;margin-top:.45rem;border:.05rem solid #2f4a3a;outline:.03rem solid #c08a4f;outline-offset:.12rem">${rubberMap()}</div>
+      <div style="display:flex;gap:1.4rem;margin-top:.5rem;font-size:.44rem;align-items:center">
+        <span><svg width="1.6rem" height=".3rem"><line x1="0" y1="6" x2="64" y2="6" stroke="#8a5a2e" stroke-width="4" stroke-dasharray="9 6"/></svg> Seeds, 1876 (Amazon → Liverpool → Kew)</span>
+        <span><svg width="1.6rem" height=".3rem"><line x1="0" y1="6" x2="64" y2="6" stroke="#2f4a3a" stroke-width="4"/></svg> Seedlings, from Kew to Ceylon and Malaya</span>
+      </div>
+    </div>
+
+    <!-- R6 MAP LABEL + R7 QR -->
+    <div class="abs vic shadow" style="left:${X+31.8}rem;top:64rem;width:7.2rem;height:11rem;padding:.6rem;border-top:.35rem solid #2f4a3a">
+      <div class="lt">From the Tapajós to Asia (map)</div>
+      <div class="lm">1876 to the 1890s · Made for this exhibition</div>
+      <div class="ld">The seeds’ route: the Tapajós river, Belém, Liverpool, Kew Gardens, then Ceylon and Malaya.</div>
+    </div>
+    <div class="abs shadow" style="left:${X+31.8}rem;top:76.4rem;width:7.2rem;height:8.6rem;background:#2f4a3a;color:#f1e8d4;padding:.5rem;text-align:center;font-family:Unna,serif">
+      <div style="display:inline-block;padding:.15rem;background:#fff">${qrBlock(4.6,111)}</div>
+      <div style="font-size:.42rem;margin-top:.25rem;line-height:1.25">Listen &amp; see the sources<br><span style="color:#e2b98a">Audio guide · Story 1</span></div>
+    </div>`;
+}
+
+/* ============================================================
+   STORY 2 · HAVASUPAI  (Boy Scouts permission-slip template)
+   ============================================================ */
+function tubeIcon(size, col) { // simple collection-tube line icon (no blood)
+  return `<svg width="${size}rem" height="${size}rem" viewBox="0 0 40 40">
+    <rect x="15" y="3" width="10" height="6" rx="1.2" fill="${col}"/>
+    <path d="M16 9 H24 V31 A4 4 0 0 1 16 31 Z" fill="none" stroke="${col}" stroke-width="2"/>
+    <line x1="18" y1="14" x2="22" y2="14" stroke="${col}" stroke-width="1.4"/>
+    <line x1="18" y1="18" x2="22" y2="18" stroke="${col}" stroke-width="1.4"/>
+    <line x1="18" y1="22" x2="22" y2="22" stroke="${col}" stroke-width="1.4"/></svg>`;
+}
+function flowIcon(kind) {
+  const c = "#33303d";
+  if (kind=="blood") return tubeIcon(2.2, c);
+  if (kind=="dna") return `<svg width="2.2rem" height="2.2rem" viewBox="0 0 40 40" fill="none" stroke="${c}" stroke-width="2">
+      <path d="M12 4 C28 12 12 28 28 36"/><path d="M28 4 C12 12 28 28 12 36"/>
+      <line x1="15" y1="9" x2="25" y2="9"/><line x1="17" y1="15" x2="23" y2="15"/><line x1="17" y1="25" x2="23" y2="25"/><line x1="15" y1="31" x2="25" y2="31"/></svg>`;
+  if (kind=="data") return `<svg width="2.2rem" height="2.2rem" viewBox="0 0 40 40" fill="${c}">
+      ${[0,1,2,3].map(i=>[0,1,2,3].map(j=>`<rect x="${7+j*7}" y="${7+i*7}" width="5" height="5" opacity="${((i*3+j*5)%4)/4+.25}"/>`).join("")).join("")}</svg>`;
+  return `<svg width="2.2rem" height="2.2rem" viewBox="0 0 40 40" fill="none" stroke="${c}" stroke-width="2">
+      <path d="M20 36 C20 36 9 24 9 16 A11 11 0 0 1 31 16 C31 24 20 36 20 36 Z"/><circle cx="20" cy="16" r="4"/></svg>`;
+}
+function supaiMap() {
+  const pr = ([lo,la]) => `${((lo+115)*8.3).toFixed(1)},${((37.2-la)*10).toFixed(1)}`;
+  const AZ = [[-114.05,37],[-109.05,37],[-109.05,31.33],[-111.07,31.33],[-114.82,32.49],[-114.72,32.72],[-114.5,33.0],[-114.13,34.3],[-114.63,34.87],[-114.05,36.2]];
+  const river = [[-111.59,36.87],[-111.83,36.45],[-111.87,36.18],[-112.1,36.1],[-112.4,36.2],[-112.7,36.35],[-113.0,36.25],[-113.3,36.05],[-113.8,35.92],[-114.05,36.1],[-114.4,36.1],[-114.6,35.5],[-114.6,34.8],[-114.4,34.2],[-114.7,33.4],[-114.6,32.72]];
+  const pt = (lo,la,r,fill,label,dx,dy,anchor,bold) => { const [x,y]=pr([lo,la]).split(",");
+    return `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="#fdf6e3" stroke-width=".5"/>
+      <text x="${+x+dx}" y="${+y+dy}" font-size="${bold?3.3:2.6}" font-family="Montserrat" font-weight="${bold?700:600}" fill="#33303d" text-anchor="${anchor}">${label}</text>`; };
+  return `<svg viewBox="-2 -2 56 66" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+    <polygon points="${AZ.map(pr).join(" ")}" fill="#e2d8bb" stroke="#8a7a4e" stroke-width=".5"/>
+    <polyline points="${river.map(pr).join(" ")}" fill="none" stroke="#5f8aa0" stroke-width="1"/>
+    <path d="M${pr([-112.0,36.32])} Q${pr([-112.5,36.55])} ${pr([-113.1,36.3])}" fill="none" stroke="#b6a883" stroke-width="3.2" stroke-linecap="round" opacity=".7"/>
+    <text x="${pr([-112.6,36.72]).split(",")[0]}" y="${pr([-112.6,36.72]).split(",")[1]}" font-size="2.4" font-family="Montserrat" font-style="italic" fill="#6d6040" text-anchor="middle">Grand Canyon</text>
+    ${pt(-112.69,36.24,1.6,"#b03a2e","Supai",-2,4.2,"end",true)}
+    ${pt(-112.14,36.05,.9,"#33303d","Grand Canyon Village",1.6,3.4,"start",false)}
+    ${pt(-111.65,35.2,.9,"#33303d","Flagstaff",1.6,1,"start",false)}
+    ${pt(-112.07,33.45,.9,"#33303d","Phoenix",1.6,1,"start",false)}
+    <text x="${pr([-111.6,32.3]).split(",")[0]}" y="${pr([-111.6,32.3]).split(",")[1]}" font-size="4" font-family="League Spartan" font-weight="700" fill="#8a7a4e" text-anchor="middle" letter-spacing=".4">ARIZONA</text>
+    <text x="${pr([-111.6,31.8]).split(",")[0]}" y="${pr([-111.6,31.8]).split(",")[1]}" font-size="2.4" font-family="Montserrat" fill="#8a7a4e" text-anchor="middle">USA</text>
+  </svg>`;
+}
+
+function havasupaiColumn(X) {
+  const waffle = Array.from({length:23},(_,i)=>`<div style="width:1rem;height:1rem;border-radius:.12rem;background:${i<8?'#b6a883':'#33303d'}"></div>`).join("");
+  const flow = [["blood","BLOOD","Given for a diabetes study"],["dna","DNA","Read from the stored samples"],["data","DATA","Copied, shared, analysed"],["pin","ANCESTRY","A claim about where a people came from"]];
+  return `
+    <!-- H1 STORY PANEL -->
+    <div class="abs scout shadow" style="left:${X+1}rem;top:11.5rem;width:21rem;height:29.7rem;overflow:hidden">
+      <div style="display:flex;height:5.4rem">
+        <div class="khaki" style="width:5.4rem;display:flex;align-items:center;justify-content:center">
+          <div style="width:3.6rem;height:3.6rem;border-radius:50%;background:#fdf6e3;border:.18rem solid #33303d;display:flex;align-items:center;justify-content:center">${tubeIcon(2.6,"#33303d")}</div></div>
+        <div style="flex:1;padding:.8rem .9rem 0">
+          <div class="cap">Section 2 · Story 2</div>
+          <div class="spartan" style="font-size:1rem;line-height:1;margin-top:.25rem">WHAT THE BLOOD<br>WAS FOR</div>
+        </div>
+      </div>
+      <div style="padding:.55rem 1.3rem 0">
+        <div style="font-size:.42rem;color:#8a7a4e;font-weight:600;margin-bottom:.45rem;padding-bottom:.35rem;border-bottom:.05rem solid #b6a883">The Havasupai Tribe and Arizona State University · Grand Canyon, USA · 1990–2010</div>
+        ${HAV_P.map(p=>`<p>${p}</p>`).join("")}
+      </div>
+      <div class="abs" style="left:1.3rem;right:1.3rem;bottom:1rem;border-top:.07rem dashed #33303d;padding-top:.35rem">
+        <div class="spartan" style="font-size:.62rem;line-height:1.15">They gave blood for a health study.<br><span style="color:#8a7a4e">How much permission travelled with it?</span></div>
+      </div>
+    </div>
+
+    <!-- H2 BLOOD -> ANCESTRY + 23 OUTPUTS -->
+    <div class="abs scout shadow" style="left:${X+23.5}rem;top:11.5rem;width:15.5rem;height:29.7rem;padding:.9rem 1rem">
+      <div class="cap">Diagram</div>
+      <div class="spartan" style="font-size:.66rem;line-height:1.05;margin:.15rem 0 .5rem">FROM BLOOD<br>TO ANCESTRY</div>
+      ${flow.map(([k,t,d],i)=>`
+        <div style="display:flex;gap:.45rem;align-items:center">
+          <div style="width:2.6rem;height:2.6rem;border-radius:50%;background:${i==3?'#b6a883':'#efe6c9'};display:flex;align-items:center;justify-content:center;flex:none">${flowIcon(k)}</div>
+          <div><div class="spartan" style="font-size:.56rem">${t}</div><div style="font-size:.44rem;line-height:1.3">${d}</div></div>
+        </div>${i<3?'<div style="margin:.08rem 0 .08rem 1.1rem;font-size:.55rem;color:#8a7a4e;line-height:1">▼</div>':''}`).join("")}
+      <div style="margin-top:.6rem;border-top:.05rem solid #b6a883;padding-top:.45rem">
+        <div class="spartan" style="font-size:.5rem;line-height:1.15">23 PAPERS &amp; DISSERTATIONS</div>
+        <div style="display:grid;grid-template-columns:repeat(6,1rem);gap:.22rem;margin:.35rem 0 .3rem">${waffle}</div>
+        <div style="font-size:.42rem;line-height:1.5"><span style="display:inline-block;width:.42rem;height:.42rem;background:#b6a883;vertical-align:middle"></span> 8 on diabetes<br>
+          <span style="display:inline-block;width:.42rem;height:.42rem;background:#33303d;vertical-align:middle"></span> 15 on schizophrenia, inbreeding or the tribe’s origins</div>
+      </div>
+      <div class="abs" style="left:1rem;right:1rem;bottom:.7rem">
+        <div class="lt">From blood to ancestry (diagram)</div>
+        <div class="lm">Made for this exhibition</div>
+        <div class="ld" style="font-size:.42rem">Blood becomes DNA, DNA becomes data, and data can answer questions no one asked when the blood was given.</div>
+      </div>
+    </div>
+
+    <!-- H3 WHAT DID "YES" MEAN? — permission-slip form -->
+    <div class="abs scout shadow" style="left:${X+1}rem;top:43rem;width:38rem;height:19rem;overflow:hidden">
+      <div style="display:flex;height:2.6rem">
+        <div class="khaki" style="width:2.6rem"></div>
+        <div style="flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 1rem">
+          <div class="spartan" style="font-size:.85rem">WHAT DID “YES” MEAN?</div>
+          <div class="cap">Three versions of one permission · 1990–1994</div></div>
+      </div>
+      <div style="display:flex;gap:.6rem;padding:.55rem 1rem 0">
+        ${[["What tribal leaders were told","Diabetes research","The project was described to the Tribal Council again and again as a study of diabetes."],
+           ["What the written form said","“…to study the causes of behavioral/medical disorders.”","The consent form signed by some of the early donors."],
+           ["What later donors heard","Diabetes research","From 1991 to 1994 some blood was taken with spoken, not written, consent, explained as diabetes research."]]
+          .map(([h,big,small],i)=>`
+          <div style="flex:1;border:.06rem solid #33303d;padding:.5rem .6rem;background:#fffaf0;height:9.4rem">
+            <div class="cap" style="color:#33303d">${i+1}. ${h}</div>
+            <div class="spartan" style="font-size:${i==1?.6:.78}rem;line-height:1.15;margin:.3rem 0 .3rem;${i==1?'font-family:Montserrat;font-weight:700;font-style:italic':''}">${big}</div>
+            <div style="font-size:.47rem;line-height:1.38">${small}</div>
+          </div>`).join("")}
+      </div>
+      <div style="margin:.6rem 1rem 0;text-align:center;font-size:.38rem;letter-spacing:.06rem;color:#8a7a4e;font-weight:600;white-space:nowrap;overflow:hidden">- - - - - - - - - - - - - - - - - - - - - - - - - -  ✂  CUT ALONG THIS LINE  - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+      <div style="display:flex;gap:.8rem;padding:.35rem 1rem 0;align-items:flex-start">
+        <div style="flex:1.25">
+          <div style="font-size:.6rem;line-height:1.6"><b>[ ✓ ] YES</b>, I give permission for my blood to be used to study <span style="display:inline-block;width:6rem;border-bottom:.05rem solid #33303d"></span> .</div>
+          <div style="font-size:.44rem;color:#8a7a4e;font-style:italic;margin-top:.2rem">Illustration, not a historical form. Every permission has a blank like this. Who fills it in?</div>
+        </div>
+        <div style="flex:1;border-left:.05rem solid #b6a883;padding-left:.6rem">
+          <div class="lt">What did “yes” mean? (consent panel)</div>
+          <div class="lm">1990–1994 · Based on the Arizona court record and later reviews</div>
+          <div class="ld" style="font-size:.44rem">Three versions of one permission: what leaders were told, what the written form said, and what later donors heard.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- H4 MAP -->
+    <div class="abs scout shadow" style="left:${X+1}rem;top:64rem;width:18.5rem;height:21rem;padding:.8rem 1rem">
+      <div class="cap">Map</div>
+      <div class="spartan" style="font-size:.66rem;margin:.12rem 0 .2rem">SUPAI, ARIZONA</div>
+      <div style="height:12.4rem;background:#f6eed6;border:.05rem solid #b6a883">${supaiMap()}</div>
+      <div style="margin-top:.4rem">
+        <div class="lt">Supai, Arizona (map)</div>
+        <div class="lm">Made for this exhibition</div>
+        <div class="ld">Supai, the Havasupai village deep in the Grand Canyon, reachable only on foot, by mule or by helicopter.</div>
+      </div>
+    </div>
+
+    <!-- H5 WHAT CAME BACK — checklist -->
+    <div class="abs scout shadow" style="left:${X+20.5}rem;top:64rem;width:18.5rem;height:13.6rem;overflow:hidden">
+      <div class="khaki" style="padding:.45rem .8rem"><div class="spartan" style="font-size:.6rem">WHAT CAME BACK IN 2010</div></div>
+      <div style="padding:.5rem .8rem;font-size:.52rem;line-height:1.55">
+        ${["151 remaining blood samples","Lab notebooks and family-tree records","$700,000 to 41 tribe members","A formal apology","No new ASU research with the samples"].map(t=>`<div><b style="font-family:Segoe UI Symbol,Arial">☑</b> ${t}</div>`).join("")}
+        <div class="cap" style="margin-top:.3rem;color:#b03a2e">Not returned</div>
+        ${["23 papers and dissertations, still published","Copies and data already passed to other researchers"].map(t=>`<div><b style="font-family:Segoe UI Symbol,Arial">☐</b> ${t}</div>`).join("")}
+        <div class="spartan" style="font-size:.56rem;margin-top:.35rem">The blood went home. The published papers did not.</div>
+        <div style="margin-top:.3rem;border:.05rem dashed #b03a2e;padding:.15rem .3rem;font-size:.36rem;color:#b03a2e;line-height:1.3">PLACEHOLDER · a Havasupai member’s words at the 2010 return, with attribution (e.g. State Press, April 2010)</div>
+      </div>
+    </div>
+    <div class="abs scout" style="left:${X+20.5}rem;top:77.9rem;width:18.5rem;font-size:.32rem;color:#6d6040;line-height:1.3">
+      <b>What came back (checklist)</b> · 2010 settlement · Made for this exhibition</div>
+
+    <!-- H6 QR -->
+    <div class="abs shadow" style="left:${X+20.5}rem;top:79.2rem;width:18.5rem;height:5.8rem;background:#33303d;color:#fdf6e3;display:flex;align-items:center;gap:.6rem;padding:.4rem .6rem;font-family:Montserrat">
+      <div style="padding:.12rem;background:#fff;flex:none">${qrBlock(4.4,222)}</div>
+      <div style="font-size:.42rem;line-height:1.35">Listen &amp; see the sources<br><span style="color:#d8cba5;font-weight:700">Audio guide · Story 2</span></div>
+    </div>`;
+}
+
+/* ============================================================
+   STORY 3 · CLEARVIEW AI  (Rimberio content-table template)
+   ============================================================ */
+function asterisk(size, col) {
+  return `<svg width="${size}rem" height="${size}rem" viewBox="-20 -20 40 40"><g fill="${col}">
+    ${[0,45,90,135].map(a=>`<rect x="-3.6" y="-19" width="7.2" height="38" rx="3.6" transform="rotate(${a})"/>`).join("")}</g></svg>`;
+}
+function faceMesh() {
+  const pts = [[50,12],[34,16],[66,16],[24,28],[76,28],[20,44],[80,44],[22,60],[78,60],[28,74],[72,74],[38,85],[62,85],[50,89],
+    [32,38],[42,36],[58,36],[68,38],[34,46],[40,45],[46,46],[54,46],[60,45],[66,46],[50,52],[46,61],[54,61],[50,64],[40,72],[50,70],[60,72],[50,76]];
+  const tri = [[0,1,2],[1,3,14],[2,4,17],[3,5,14],[4,6,17],[5,7,18],[6,8,23],[7,9,28],[8,10,30],[9,11,28],[10,12,30],[11,13,31],[12,13,31],
+    [14,15,19],[15,16,24],[16,17,22],[14,18,19],[17,22,23],[19,20,24],[21,22,24],[20,25,24],[21,26,24],[25,27,24],[26,27,24],[25,28,29],[26,29,30],[28,29,31],[29,30,31],[18,7,28],[23,8,30],[1,14,15],[2,16,17],[0,15,16]];
+  const lines = tri.map(([a,b,c])=>`<polygon points="${pts[a]} ${pts[b]} ${pts[c]}" fill="none" stroke="#9b5a3c" stroke-width=".45" opacity=".7"/>`).join("");
+  const dots = pts.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.3" fill="#241a15"/>`).join("");
+  return `<svg viewBox="10 4 80 92" width="100%" height="100%"><ellipse cx="50" cy="50" rx="31" ry="41" fill="#efe1d6"/>${lines}${dots}</svg>`;
+}
+function vectorList() {
+  let s = 4242; const r = () => (s = (s*16807) % 2147483647) / 2147483647;
+  const rows = []; for (let i=0;i<11;i++) { const v = (r()*0.4-0.2); rows.push(`<div style="display:flex;justify-content:space-between"><span style="color:#9b5a3c">${String(i+1).padStart(3,"0")}</span><span>${v<0?"−":"+"}${Math.abs(v).toFixed(4)}</span></div>`); }
+  rows.push(`<div style="text-align:center;color:#9b5a3c">⋮</div><div style="display:flex;justify-content:space-between"><span style="color:#9b5a3c">512</span><span>+0.0731</span></div>`);
+  return rows.join("");
+}
+const POSTS = [
+  {who:"photoshare.example/maya.k", where:"A friend’s post: she is beside the friend", bg:"#cdd7e6", tint:"#8c9bb3"},
+  {who:"weekend-guide.example/coffee", where:"“Best coffee spots this winter”", bg:"#e6d5c3", tint:"#a8876a"},
+  {who:"photoshare.example/elena.v", where:"Her own post", bg:"#d9d9d4", tint:"#8e8e86"},
+  {who:"New photo, taken in the street", where:"The photo that gets searched", bg:"#d7e3d6", tint:"#7f9a7d"},
+];
+function post(p, i) {
+  return `<div style="width:8.55rem;background:#fff;border:.04rem solid #e2d6cd;border-radius:.25rem;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:.25rem;padding:.25rem .3rem">
+      <div style="width:.75rem;height:.75rem;border-radius:50%;background:#d5b7a3"></div>
+      <div style="font-size:.32rem;font-weight:700;line-height:1.1">${p.who}<br><span style="font-weight:400;color:#8a7a70">${i<3?"Public post":"Not posted anywhere"}</span></div></div>
+    <div style="position:relative;height:7.4rem;background:${p.bg}">${personSil(p.tint, 2.1, 1.6, 5.6)}
+      <div class="abs" style="left:.25rem;bottom:.2rem;font-size:.26rem;background:rgba(255,255,255,.8);padding:.03rem .12rem">Print the same photo used in the video</div></div>
+    <div style="font-size:.44rem;padding:.25rem .35rem;line-height:1.25"><b>${String.fromCharCode(65+i)}.</b> ${p.where}</div>
+  </div>`;
+}
+function clearviewColumn(X) {
+  const rulings = [
+    ["2021","Canada","Mass surveillance; illegal","Clearview disputed it"],
+    ["2021","Australia","Stop collecting; destroy Australians’ data","Order issued"],
+    ["2022","USA","Most private companies barred","Settlement, no fault admitted"],
+    ["2024","Netherlands","€30.5 million fine","Fine issued"],
+    ["2025","EU","AI Act bans scraping faces to build such databases","In force"],
+    ["2026","Clearview","“More than 100 billion images”","Still operating"],
+  ];
+  return `
+    <!-- C1 STORY PANEL -->
+    <div class="abs feed shadow" style="left:${X+1}rem;top:11.5rem;width:21rem;height:29.7rem;overflow:hidden">
+      <div class="tan" style="position:relative;height:5.6rem;padding:.75rem 1.3rem 0 3.2rem">
+        <div class="abs" style="left:-.9rem;top:-.9rem">${asterisk(3.4,"#9b5a3c")}</div>
+        <div class="abs dots" style="right:.8rem;top:.7rem;width:2.25rem;height:2.25rem"></div>
+        <div style="font-family:Poppins;font-weight:700;font-size:.42rem">Section 2 · Story 3</div>
+        <div class="pop" style="font-size:1.02rem;margin-top:.25rem">A Search Engine<br>for Faces</div>
+      </div>
+      <div style="padding:.55rem 1.3rem 0">
+        <div style="font-size:.42rem;color:#9b5a3c;margin-bottom:.45rem;padding-bottom:.35rem;border-bottom:.05rem solid #d5b7a3">Clearview AI · New York, USA · 2017 to today</div>
+        ${CLV_P.map(p=>`<p>${p}</p>`).join("")}
+        <div style="font-size:.36rem;color:#9b5a3c;font-weight:700">Status as of October 2026.</div>
+      </div>
+      <div class="abs tan" style="left:0;right:0;bottom:0;padding:.55rem 1.3rem .75rem">
+        <div class="pop" style="font-size:.56rem;line-height:1.25">Nobody lost a photograph.<br><span style="color:#5b3422">So what, if anything, was taken when the people in them became searchable?</span></div>
+      </div>
+    </div>
+
+    <!-- C2 FACEPRINT -->
+    <div class="abs feed shadow" style="left:${X+23.5}rem;top:11.5rem;width:15.5rem;height:29.7rem;padding:.9rem 1rem">
+      <div style="font-family:Poppins;font-weight:700;font-size:.36rem;color:#9b5a3c">Faceprint</div>
+      <div class="pop" style="font-size:.7rem;margin:.1rem 0 .3rem">A face as numbers</div>
+      <div style="height:9.6rem;background:#fff;border-radius:.3rem;border:.04rem solid #e2d6cd">${faceMesh()}</div>
+      <div style="text-align:center;font-size:.6rem;color:#9b5a3c;margin:.1rem 0">▼</div>
+      <div style="background:#241a15;color:#f3e7dd;border-radius:.3rem;padding:.4rem .6rem;font-family:Consolas,monospace;font-size:.36rem;line-height:1.35">${vectorList()}</div>
+      <div style="margin-top:.45rem;border-top:.05rem solid #d5b7a3;padding-top:.35rem">
+        <div class="pop" style="font-size:.46rem">Images in the database</div>
+        ${[["2020","3 billion+",.5],["2022","20 billion",2.7],["2026","100 billion+",13.5]].map(([y,n,w])=>`
+          <div style="display:flex;align-items:center;gap:.25rem;margin-top:.2rem;font-size:.38rem">
+            <b style="width:1rem">${y}</b><div style="height:.5rem;width:${w*0.72}rem;background:#9b5a3c;border-radius:.1rem"></div><span>${n}</span></div>`).join("")}
+        <div style="font-size:.32rem;color:#9b5a3c;margin-top:.15rem">Images, not people. The 2026 figure is Clearview’s own claim.</div>
+      </div>
+      <div class="abs" style="left:1rem;right:1rem;bottom:.7rem">
+        <div class="lt">A face as numbers (faceprint)</div>
+        <div class="lm">Made for this exhibition · Values are illustrative</div>
+        <div class="ld" style="font-size:.42rem">A face turned into numbers; Canada’s regulators described each Clearview faceprint as 512 data points.</div>
+      </div>
+    </div>
+
+    <!-- C3 ONE FACE, FOUR PLACES -->
+    <div class="abs feed shadow" style="left:${X+1}rem;top:43rem;width:38rem;height:13.4rem;padding:.55rem .7rem">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.35rem">
+        <div class="pop" style="font-size:.6rem">One face, four places</div>
+        <div style="font-size:.4rem;color:#9b5a3c"><b>Staged photographs</b> · 2026 · Made for this exhibition with a consenting volunteer</div></div>
+      <div style="display:flex;gap:.45rem">${POSTS.map(post).join("")}</div>
+      <div style="font-size:.46rem;margin-top:.3rem">One consenting volunteer in four settings, each photo shared with a different audience.</div>
+    </div>
+
+    <!-- C4 PIPELINE -->
+    <div class="abs shadow tan" style="left:${X+1}rem;top:57.4rem;width:38rem;height:5.2rem;padding:.45rem .7rem;font-family:'DM Sans'">
+      <div style="display:flex;align-items:center;gap:.25rem">
+        ${[["01","POSTED","Visible online"],["02","COLLECTED","Copied by Clearview"],["03","FACE DATA","Turned into a faceprint"],["04","SEARCHABLE","Found from a new photo"]]
+          .map(([n,t,d],i)=>`<div style="flex:1;background:#fbf6f2;border-radius:.25rem;padding:.25rem .4rem">
+            <div style="font-family:Poppins;font-weight:700;font-size:.36rem;color:#9b5a3c">${n}</div>
+            <div class="pop" style="font-size:.62rem">${t}</div><div style="font-size:.42rem">${d}</div></div>${i<3?'<div class="pop" style="font-size:.6rem;color:#5b3422">→</div>':''}`).join("")}
+      </div>
+      <div style="font-size:.36rem;margin-top:.25rem;color:#3b2a20"><b>Posted → collected → face data → searchable (diagram)</b> · Made for this exhibition · The four steps that turn someone visible online into someone searchable.</div>
+    </div>
+
+    <!-- C5 CANADA REPORT -->
+    <div class="abs feed shadow" style="left:${X+1}rem;top:64rem;width:18.5rem;height:21rem;padding:.8rem">
+      <div style="font-family:Poppins;font-weight:700;font-size:.36rem;color:#9b5a3c">Document</div>
+      <div class="pop" style="font-size:.6rem;margin:.1rem 0 .35rem">Canada’s privacy commissioners</div>
+      <div style="position:relative;height:10rem;background:#fff;border:.04rem solid #ccc;padding:.5rem .6rem;font-family:'Segoe UI',Arial">
+        <div style="display:flex;align-items:center;gap:.25rem"><div style="width:.55rem;height:.55rem;background:#c0392b"></div>
+          <div style="font-size:.28rem;font-weight:700">Office of the Privacy Commissioner of Canada</div></div>
+        <div style="font-size:.4rem;font-weight:700;margin:.25rem 0 .1rem">Joint investigation of Clearview AI, Inc.</div>
+        <div style="font-size:.26rem;color:#555;margin-bottom:.25rem">PIPEDA Findings #2021-001 · 2 February 2021</div>
+        ${greyLines(4,100,.13,.12)}
+        <div style="background:#f3e3a6;height:1.4rem;margin:.15rem 0;font-size:.28rem;padding:.1rem .15rem">[Chosen extract from the findings]</div>
+        ${greyLines(4,100,.13,.12)}
+        <div class="note-ph" style="right:.2rem;bottom:.15rem">PLACEHOLDER · print the real extract from priv.gc.ca</div>
+      </div>
+      <div style="margin-top:.4rem">
+        <div class="lt">Canada’s privacy commissioners</div>
+        <div class="lm">3 February 2021 · Report of findings · Extract</div>
+        <div class="ld">Canada’s 2021 finding that Clearview’s scraping was mass surveillance and broke Canadian law; Clearview disputed it.</div>
+      </div>
+    </div>
+
+    <!-- C6 RULINGS TABLE -->
+    <div class="abs feed shadow" style="left:${X+20.5}rem;top:64rem;width:18.5rem;height:14.6rem;overflow:hidden">
+      <div class="tan" style="padding:.4rem .7rem;display:flex;justify-content:space-between;align-items:center">
+        <div class="pop" style="font-size:.6rem">Rulings so far</div>
+        <div class="dots" style="width:1.5rem;height:.75rem"></div></div>
+      <table style="width:100%;border-collapse:collapse;font-size:.42rem;line-height:1.25">
+        <tr style="background:#241a15;color:#fbf6f2;font-family:Poppins;font-weight:700"><td style="padding:.15rem .3rem">Year</td><td>Where</td><td>Decision</td><td style="padding-right:.3rem">Status</td></tr>
+        ${rulings.map((r,i)=>`<tr style="background:${i%2?'#f3e8e0':'#fbf6f2'}"><td style="padding:.28rem .3rem;font-weight:700">${r[0]}</td><td style="font-weight:700;padding-right:.15rem">${r[1]}</td><td style="padding-right:.2rem">${r[2]}</td><td style="padding-right:.3rem;color:#9b5a3c">${r[3]}</td></tr>`).join("")}
+      </table>
+      <div style="padding:.35rem .7rem;font-size:.4rem;line-height:1.3">Clearview admits no wrongdoing and has not paid several European fines. Status as of October 2026.</div>
+      <div style="padding:0 .7rem;font-size:.36rem;color:#6b5040"><b>Rulings so far (table)</b> · 2021–2026 · Made for this exhibition</div>
+    </div>
+
+    <!-- C7 QR -->
+    <div class="abs shadow" style="left:${X+20.5}rem;top:79.2rem;width:18.5rem;height:5.8rem;background:#241a15;color:#fbf6f2;display:flex;align-items:center;gap:.6rem;padding:.4rem .6rem;font-family:'DM Sans'">
+      <div style="padding:.12rem;background:#fff;flex:none">${qrBlock(4.4,333)}</div>
+      <div style="font-size:.42rem;line-height:1.35">Listen &amp; see the sources<br><span style="color:#d5b7a3;font-weight:700">Audio guide · Story 3</span></div>
+    </div>`;
+}
+
+/* ============================================================
+   THE BOARD
+   ============================================================ */
+function board(showTags) {
+  let tags = "";
+  if (showTags) {
+    tags += tag("H",0,0);
+    const T = (p,o) => [[1,.2,10.9],[2,22.7,10.9],[3,.2,42.4],[4,19.7,42.4],[5,.2,63.4],[6,31,63.4],[7,31,75.8]].map(([n,x,y])=>tag(p+n,o+x,y)).join("");
+    tags += T("R",0);
+    tags += [[1,.2,10.9],[2,22.7,10.9],[3,.2,42.4],[4,.2,63.4],[5,19.7,63.4],[6,19.7,78.6]].map(([n,x,y])=>tag("H"+n,40+x,y)).join("");
+    tags += [[1,.2,10.9],[2,22.7,10.9],[3,.2,42.4],[4,.2,56.8],[5,.2,63.4],[6,19.7,63.4],[7,19.7,78.6]].map(([n,x,y])=>tag("C"+n,80+x,y)).join("");
+  }
+  return `
+  <div class="board">
+    <div class="abs dark shadow" style="left:1rem;top:1rem;width:118rem;height:9rem;padding:1rem 1.4rem;display:flex;gap:1.6rem">
+      <div style="width:31rem;flex:none">
+        <div class="kicker" style="color:#c9a36a">Section 2</div>
+        <div class="serif" style="font-size:1.75rem;line-height:1.1;margin:.15rem 0 .25rem">What Can Be Taken?</div>
+        <div style="font-size:.5rem;color:#c9b998">Three cases, from 1876 to today</div>
+      </div>
+      <div style="column-count:3;column-gap:1.4rem;font-size:.565rem;line-height:1.42;color:#e9e0cc;padding-top:.2rem">
+        ${SECTION_INTRO.map(p=>`<p style="margin-bottom:.3rem">${p}</p>`).join("")}
+      </div>
+    </div>
+    ${rubberColumn(0)}
+    ${havasupaiColumn(40)}
+    ${clearviewColumn(80)}
+    ${tags}
+  </div>`;
+}
+
+/* ============================================================
+   THE DESK (plan view, 120 x 60, three thirds)
+   ============================================================ */
+function votingStrip(X) {
+  const pins = [[3.1,"#c0392b"],[5.6,"#2e6da4"],[6.2,"#e1b12c"],[8.4,"#2e8b57"]];
+  const ticks = Array.from({length:11},(_,i)=>{ const x = 2 + i*3.4;
+    return `<div class="abs" style="left:${x}rem;top:0;width:.06rem;height:${i%5==0?1.4:.9}rem;background:#1f262e"></div>
+            <div class="abs" style="left:${x-.3}rem;top:1.5rem;width:.6rem;text-align:center;font-size:.42rem;font-weight:700">${i}</div>`; }).join("");
+  return `
+    <div class="abs shadow" style="left:${X+1}rem;top:51.5rem;width:38rem;height:6.5rem;background:radial-gradient(circle at 30% 40%,rgba(0,0,0,.08) 0 .05rem,transparent .06rem) 0 0/.4rem .4rem,#c79f6e;border:.08rem solid #6b4a2b">
+      <div class="abs" style="left:2rem;top:3.2rem;width:34rem;height:.12rem;background:#1f262e"></div>
+      <div class="abs" style="left:0;top:.6rem;width:40rem">${ticks}</div>
+      <div class="abs" style="left:.4rem;top:4.2rem;font-size:.46rem;font-weight:700">0 · Not theft</div>
+      <div class="abs" style="right:.4rem;top:4.2rem;font-size:.46rem;font-weight:700">Theft · 10</div>
+      ${pins.map(([v,c])=>`<div class="abs" style="left:${2+v*3.4-.45}rem;top:2.75rem;width:.9rem;height:.9rem;border-radius:50%;background:${c};box-shadow:0 .08rem .14rem rgba(0,0,0,.55)"></div>`).join("")}
+    </div>
+    <div class="abs shadow" style="left:${X+1.5}rem;top:38rem;width:23rem;height:8.6rem;background:#1f262e;color:#efe6d2;padding:.8rem 1rem">
+      <div class="serif" style="font-size:1.05rem;color:#c9a36a">Theft or not?</div>
+      <div style="font-size:.56rem;line-height:1.42;margin-top:.3rem">Place one pin on the line where you think this case belongs. 0 means ‘not theft’; 10 means ‘theft’. The line is continuous because many cases here do not fit a yes-or-no answer. The first few pins were placed by the exhibition team at the opening. Each evening, the strip is photographed and added to the digital catalogue.</div>
+    </div>
+    <div class="abs shadow" style="left:${X+27}rem;top:39rem;width:7rem;height:7rem;border-radius:50%;background:radial-gradient(circle,#e9e4da 55%,#bdb6a8);border:.12rem solid #8e8577"></div>
+    ${[[29.4,41.3,"#c0392b"],[30.6,42.4,"#2e6da4"],[29.9,43.4,"#e1b12c"],[31.2,41,"#2e8b57"],[28.9,42.7,"#2e6da4"],[31.4,43.6,"#c0392b"]].map(([x,y,c])=>`<div class="abs" style="left:${X+x}rem;top:${y}rem;width:.8rem;height:.8rem;border-radius:50%;background:${c};box-shadow:0 .05rem .1rem rgba(0,0,0,.5)"></div>`).join("")}
+    <div class="dnote" style="left:${X+26.5}rem;top:46.3rem;width:8rem;text-align:center">Pushpins</div>`;
+}
+function riser(X) { return `<div class="abs shadow" style="left:${X+14}rem;top:3rem;width:12rem;height:12rem;background:#1b1b1b;border-radius:.2rem"></div>`; }
+
+function deskRubber(X) {
+  return `${riser(X)}
+    <div class="abs" style="left:${X+15.5}rem;top:4.5rem;width:9rem;height:9rem;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),rgba(255,255,255,.12) 45%,rgba(255,255,255,.22));border:.12rem solid rgba(255,255,255,.7)"></div>
+    <div class="abs" style="left:${X+18.7}rem;top:7.9rem;width:2.6rem;height:1.8rem;border-radius:50% 46% 48% 52%;background:radial-gradient(circle at 30% 30%,#c79a62,#8a5a2b 55%,#5e3b1a);box-shadow:inset -.1rem -.1rem .2rem rgba(0,0,0,.4)"></div>
+    <div class="dnote" style="left:${X+26.6}rem;top:4.2rem;width:9rem">Black box riser ~12 × 12 × 8 cm, petri dish (9 cm), one seed</div>
+    <div class="abs vic shadow" style="left:${X+12}rem;top:17rem;width:16rem;height:5.4rem;padding:0 .7rem .5rem">
+      <div class="orn" style="height:.7rem;margin:.25rem -.4rem .3rem"></div>
+      <div class="lt">Seed of the Pará rubber tree (<i>Hevea brasiliensis</i>)</div>
+      <div class="lm">Present day · Real seed</div>
+      <div class="ld">A seed of the Pará rubber tree, like the 70,000 Wickham shipped from the Amazon in 1876.</div>
+    </div>
+    <div class="dnote" style="left:${X+28.6}rem;top:19.2rem;width:9rem">Folded tent card, stands upright facing the visitor</div>
+    ${votingStrip(X)}`;
+}
+function deskHavasupai(X) {
+  return `${riser(X)}
+    <div class="abs" style="left:${X+15.5}rem;top:7.3rem;width:9rem;height:3.2rem;background:#e8e8e8;border-radius:.25rem;border:.06rem solid #aaa;box-shadow:inset 0 0 .2rem rgba(0,0,0,.2)"></div>
+    ${[0,1,2,3].map(i=>`<div class="abs" style="left:${X+16.3+i*2.1}rem;top:8.15rem;width:1.5rem;height:1.5rem;border-radius:50%;background:${i==1?'#b9b9c4':'#cfcfcf'};border:.06rem solid ${i==1?'#6c6c7a':'#bbb'}"></div>`).join("")}
+    <div class="dnote" style="left:${X+26.6}rem;top:4.2rem;width:9.5rem">Same black riser; small rack holding <b>one empty, unused tube</b> (grey cap, no fake blood), standing upright</div>
+    <div class="abs scout shadow" style="left:${X+12}rem;top:17rem;width:16rem;height:5.4rem;overflow:hidden;display:flex">
+      <div class="khaki" style="width:.7rem"></div>
+      <div style="padding:.45rem .6rem">
+        <div class="lt">Blood-collection tube</div>
+        <div class="lm">Present day · Unused demonstration object</div>
+        <div class="ld">An unused, empty tube; no Havasupai blood, image or genetic information is shown in this exhibition.</div>
+      </div></div>
+    <div class="dnote" style="left:${X+28.6}rem;top:19.2rem;width:9rem">Folded tent card</div>
+    ${votingStrip(X)}`;
+}
+function deskClearview(X) {
+  return `
+    <!-- C8 laptop: screen shown face-on, base below -->
+    <div class="abs shadow" style="left:${X+4}rem;top:1.4rem;width:32rem;height:19.6rem;background:#111;border-radius:.6rem .6rem .2rem .2rem;padding:.7rem .7rem .9rem">
+      <div style="position:relative;width:100%;height:100%;background:#0d1626 url('assets/video_frame_match.png') center/cover no-repeat">
+        <div class="abs" style="left:.3rem;bottom:.3rem;background:rgba(0,0,0,.6);color:#fff;font-size:.32rem;padding:.06rem .2rem;font-family:'DM Sans'">▶ Clearview_Face_Search_Loop.mp4 · 0:32 loop · frame at 0:26</div>
+      </div></div>
+    <div class="abs" style="left:${X+2.5}rem;top:21rem;width:35rem;height:1.3rem;background:linear-gradient(#c9c9c9,#9a9a9a);border-radius:0 0 .5rem .5rem"></div>
+    <div class="dnote" style="left:${X+28.4}rem;top:23.6rem;width:11rem">14–15″ laptop, plugged in, video looping full-screen, sound off, webcam covered</div>
+    <div class="abs feed shadow" style="left:${X+12}rem;top:23.4rem;width:16rem;height:5.4rem;overflow:hidden;display:flex">
+      <div class="tan" style="width:.7rem;flex:none"></div>
+      <div style="padding:.4rem .6rem">
+        <div class="lt">Face search (simulation)</div>
+        <div class="lm">Video, 32-second loop · Made for this exhibition · Not Clearview software</div>
+        <div class="ld">A simulation built by the exhibition team, not Clearview software: one new photo finds the same face in three earlier posts.</div>
+      </div></div>
+    <!-- C13 Posted publicly vs agreed to this use (lies flat) -->
+    <div class="abs feed shadow" style="left:${X+4}rem;top:29.8rem;width:32rem;height:6.6rem;overflow:hidden">
+      <div style="display:flex;height:100%">
+        <div style="flex:1;padding:.45rem .7rem;background:#fbf6f2">
+          <div style="font-family:Poppins;font-weight:700;font-size:.34rem;color:#9b5a3c">WHAT I DID</div>
+          <div class="pop" style="font-size:.72rem;margin:.1rem 0 .2rem">“I posted this publicly”</div>
+          <div style="font-size:.5rem;line-height:1.4">Friends, followers and strangers can see the photo. People who already know me can recognise me.</div></div>
+        <div class="tan" style="width:2.2rem;display:flex;align-items:center;justify-content:center"><div class="pop" style="font-size:.9rem">=?</div></div>
+        <div style="flex:1;padding:.45rem .7rem;background:#f3e8e0">
+          <div style="font-family:Poppins;font-weight:700;font-size:.34rem;color:#9b5a3c">WHAT HAPPENED NEXT</div>
+          <div class="pop" style="font-size:.72rem;margin:.1rem 0 .2rem">“I agreed to this use”</div>
+          <div style="font-size:.5rem;line-height:1.4">The photo is copied, my face becomes a faceprint, and a stranger’s photo of me can lead back to it.</div></div>
+      </div></div>
+    ${votingStrip(X)}`;
+}
+function desk(showTags) {
+  let tags = "";
+  if (showTags) for (const [p,o] of [["R",0],["H",40],["C",80]])
+    tags += tag(p+"8",o+13.3,2.4)+tag(p+"9",o+11.3,16.4)+tag(p+"10",o+.3,37.4)+tag(p+"11",o+26.3,38.4)+tag(p+"12",o+.3,50.9);
+  if (showTags) tags = tags.replace(`left:93.3rem;top:2.4rem`, `left:83.3rem;top:.8rem`).replace(`left:91.3rem;top:16.4rem`, `left:91.3rem;top:22.8rem`) + tag("C13",81.6,29.2);
+  return `
+  <div style="position:relative;width:120rem;height:60rem;background:linear-gradient(90deg,#d8c3a0,#cfb894 50%,#d8c3a0);border:.15rem solid #7b6244">
+    <div class="abs" style="left:0;top:-.1rem;width:120rem;height:.5rem;background:#5a4330"></div>
+    <div class="dnote" style="left:.6rem;top:.7rem;font-weight:600;font-size:.42rem;color:#5a4330">WALL / BOARD SIDE ↑</div>
+    <div class="dnote" style="left:.6rem;top:58.6rem;font-weight:600;font-size:.42rem;color:#5a4330">VISITOR SIDE ↓ (front edge of the desk)</div>
+    <div class="abs" style="left:40rem;top:0;height:60rem;border-left:.12rem dashed #5a4330"></div>
+    <div class="abs" style="left:80rem;top:0;height:60rem;border-left:.12rem dashed #5a4330"></div>
+    ${[["Story 1 · Rubber",0],["Story 2 · Havasupai",40],["Story 3 · Clearview AI",80]].map(([t,o])=>`<div class="dnote" style="left:${o+1}rem;top:28rem;font-size:.6rem;font-weight:700;color:#7b6244;opacity:.8">${t}</div>`).join("")}
+    ${deskRubber(0)}${deskHavasupai(40)}${deskClearview(80)}
+    ${tags}
+  </div>`;
+}
+
+/* ============================================================
+   ELEVATION
+   ============================================================ */
+function elevation() {
+  const F = 195, bx = 12, deskTop = F-75, boardTop = F-180;
+  return `
+  <div style="position:relative;width:180rem;height:200rem;background:#ece8df">
+    <div class="abs" style="left:0;top:0;width:180rem;height:${F}rem;background:#e4dfd3"></div>
+    <div class="abs" style="left:0;top:${F}rem;width:180rem;height:5rem;background:#9a9184"></div>
+    <div class="abs" style="left:${bx-.9}rem;top:${boardTop-.9}rem">${board(false)}</div>
+    <div class="abs" style="left:${bx}rem;top:${deskTop}rem;width:120rem;height:3rem;background:#7b6244"></div>
+    <div class="abs" style="left:${bx+2}rem;top:${deskTop+3}rem;width:3rem;height:72rem;background:#5d4a35"></div>
+    <div class="abs" style="left:${bx+115}rem;top:${deskTop+3}rem;width:3rem;height:72rem;background:#5d4a35"></div>
+    ${[0,40].map(o=>`<div class="abs" style="left:${bx+o+14}rem;top:${deskTop-8}rem;width:12rem;height:8rem;background:#1b1b1b"></div>`).join("")}
+    <div class="abs" style="left:${bx+15.5}rem;top:${deskTop-9.2}rem;width:9rem;height:1.2rem;border:.15rem solid rgba(255,255,255,.8);background:rgba(255,255,255,.3)"></div>
+    <div class="abs" style="left:${bx+55.5}rem;top:${deskTop-11}rem;width:9rem;height:3rem;background:#e8e8e8;border:.08rem solid #aaa"></div>
+    <div class="abs" style="left:${bx+58.6}rem;top:${deskTop-18.5}rem;width:1.5rem;height:10rem;background:linear-gradient(90deg,rgba(255,255,255,.6),rgba(220,230,235,.5));border:.08rem solid #999;border-radius:0 0 .75rem .75rem"></div>
+    <div class="abs" style="left:${bx+58.4}rem;top:${deskTop-19.8}rem;width:1.9rem;height:1.5rem;background:#b9b9c4;border-radius:.2rem"></div>
+    <div class="abs" style="left:${bx+84}rem;top:${deskTop-21.5}rem;width:32rem;height:20rem;background:#111;border-radius:.6rem .6rem .2rem .2rem;padding:.7rem"><div style="width:100%;height:100%;background:#0d1626 url('assets/video_frame_match.png') center/cover"></div></div>
+    <div class="abs" style="left:${bx+82.5}rem;top:${deskTop-1.5}rem;width:35rem;height:1.5rem;background:#a9a9a9;border-radius:0 0 .4rem .4rem"></div>
+    ${[0,40,80].map(o=>`<div class="abs" style="left:${bx+o+12}rem;top:${deskTop-5.6}rem;width:16rem;height:5.6rem;background:#f6efdf;border-top:.3rem solid ${['#2f4a3a','#b6a883','#d5b7a3'][o/40]}"></div>
+      <div class="abs" style="left:${bx+o+27}rem;top:${deskTop-4}rem;width:7rem;height:4rem;background:#d9d3c7;border-radius:0 0 1.5rem 1.5rem"></div>
+      <div class="abs" style="left:${bx+o+1}rem;top:${deskTop-.6}rem;width:38rem;height:.6rem;background:#c79f6e"></div>`).join("")}
+    <svg class="abs" style="left:136rem;top:${F-170}rem;width:46rem;height:170rem" viewBox="0 0 46 170">
+      <g fill="#6f7a86"><ellipse cx="23" cy="11.5" rx="8" ry="11"/><rect x="19.5" y="21" width="7" height="5"/>
+        <path d="M5 28 Q23 24 41 28 L45 92 L40 93 L36 46 L35 98 L34 168 L25 168 L23 104 L21 168 L12 168 L11 98 L10 46 L6 93 L1 92 Z"/></g></svg>
+    <div class="dim" style="left:${bx}rem;top:${boardTop-5}rem;width:120rem;text-align:center;border-bottom:.12rem solid #333;padding-bottom:.3rem">← 120 cm board · Rubber | Havasupai | Clearview AI, 40 cm each →</div>
+    ${[[0,"0"],[75,"75 cm desk top"],[90,"≈90 cm board bottom"],[180,"≈180 cm board top"],[155,"≈155 cm eye level"]].map(([h,t])=>`
+      <div class="abs" style="left:0;top:${F-h}rem;width:${h==155?180:11}rem;border-top:.12rem ${h==155?'dashed #c0392b':'solid #333'}"></div>
+      <div class="dim" style="left:${h==155?131:0.3}rem;top:${F-h-1.6}rem;font-size:1rem;${h==155?'color:#c0392b':''}">${t}</div>`).join("")}
+    <div class="dim" style="left:149rem;top:${F-176}rem;font-size:1rem">170 cm visitor</div>
+  </div>`;
+}
+
+/* ============================================================
+   VIEWS
+   ============================================================ */
+const VIEWS = {
+  board:     {x0:-.9, y0:-.9, w:121.8, h:91.8, s:14/R, html:()=>board(true), cap:"Whole board · Section 2 (1 cm = 14 px)"},
+  rubber:    {x0:-.9, y0:-.9, w:43,   h:91.8, s:24/R, html:()=>board(true), cap:"Story 1 · Rubber column (1 cm = 24 px)"},
+  havasupai: {x0:39.5,y0:-.9, w:41.5, h:91.8, s:24/R, html:()=>board(true), cap:"Story 2 · Havasupai column"},
+  clearview: {x0:79.5,y0:-.9, w:42.4, h:91.8, s:24/R, html:()=>board(true), cap:"Story 3 · Clearview AI column"},
+  desk:      {x0:-.5, y0:-1,  w:121,  h:62,   s:14/R, html:()=>desk(true),  cap:"Desk · top-down plan, all three stories"},
+  deskH:     {x0:39.5,y0:-1,  w:41,   h:62,   s:24/R, html:()=>desk(true),  cap:"Desk · Havasupai third"},
+  deskC:     {x0:79.5,y0:-1,  w:41.2, h:62,   s:24/R, html:()=>desk(true),  cap:"Desk · Clearview AI third"},
+  elev:      {w:180, h:200, s:7/R, html:()=>elevation(), cap:"Front elevation (assumed mounting heights)"},
+};
+function render(key) {
+  const v = VIEWS[key]; const W = Math.round(v.w*v.s*R), H = Math.round(v.h*v.s*R);
+  const ox = -(v.x0||0)*R*v.s, oy = -(v.y0||0)*R*v.s;
+  return `<div class="view" style="width:${W}px;height:${H}px">
+    <div class="stage" style="transform:translate(${ox}px,${oy}px) scale(${v.s})">${v.html()}</div></div>`;
+}
+const key = location.hash.slice(1);
+const root = document.getElementById("root");
+if (VIEWS[key]) root.innerHTML = render(key);
+else root.innerHTML = Object.keys(VIEWS).map(k => `<div class="vcap">${VIEWS[k].cap}</div>${render(k)}`).join('<div style="height:30px"></div>');
+</script>
+</body>
+</html>

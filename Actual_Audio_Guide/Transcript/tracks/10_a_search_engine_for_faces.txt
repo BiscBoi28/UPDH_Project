@@ -1,0 +1,11 @@
+Think of every photo of you that is online right now. Include the ones other people posted. Now imagine someone takes one new photo of you, and a single search finds all the others.
+
+That search exists. The laptop beside you shows how it works. Clearview AI, founded in the United States in 2017, copies publicly posted photos from social media, news sites and other websites. The people in them are not told, and not asked. Software turns each face into a faceprint: a list of numbers describing its geometry. Upload one photo of a stranger, and the system returns other photos of that face, with links to where they appeared. By the company's own count, it holds more than a hundred billion images. It sells searches mainly to police and government agencies.
+
+Canada's privacy commissioner called this mass surveillance, and illegal. Regulators in Australia and Europe reached similar findings. Illinois law treats a photo and a faceprint differently, and protects only the faceprint. A European privacy group says the data of billions of people was stolen.
+
+Clearview's co-founder answers that all the data inside Clearview AI is publicly available, as it is with Google. The company says police use it to identify suspects and abused children. It admits no wrongdoing.
+
+Nobody lost a photograph. So what, if anything, was taken when the people in them became searchable?
+
+These facts were checked in October 2026.

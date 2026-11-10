@@ -1,0 +1,5 @@
+Three photos, posted in three places. A friend's post. A blog. Her own account.
+A system copies each one. The originals stay online. Software finds her face, and measures it.
+The measurements become numbers, stored among billions of others.
+Then, a new photo. A woman on a street. Her face is measured the same way, and compared.
+Three matches. Three pages. Clearview AI built a search like this from over one hundred billion images.

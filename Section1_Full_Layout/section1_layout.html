@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Museum of Theft · Section 1 · Who Is the Thief? · Full layout mock-up</title>
+<style>
+  @font-face { font-family: "Diplomata SC"; src: url("assets/fonts/Diplomata_SC.ttf"); }
+  @font-face { font-family: "Unna"; src: url("assets/fonts/Unna.ttf"); }
+  @font-face { font-family: "Unna"; font-style: italic; src: url("assets/fonts/Unna_Italics.ttf"); }
+  @font-face { font-family: "League Spartan"; src: url("assets/fonts/League_Spartan.ttf"); }
+  @font-face { font-family: "Montserrat"; font-weight: 400; src: url("assets/fonts/Montserrat.ttf"); }
+  @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/fonts/Montserrat_Semi-Bold.ttf"); }
+  @font-face { font-family: "Montserrat"; font-weight: 700; src: url("assets/fonts/Montserrat_Bold.ttf"); }
+  @font-face { font-family: "Roboto"; font-weight: 400; src: url("assets/fonts/Roboto.ttf"); }
+  @font-face { font-family: "Roboto"; font-weight: 700; src: url("assets/fonts/Roboto_Bold.ttf"); }
+  @font-face { font-family: "Noticia Text"; src: url("assets/fonts/Noticia_Text.ttf"); }
+  @font-face { font-family: "Poppins"; font-weight: 700; src: url("assets/fonts/Poppins_Bold.ttf"); }
+
+  html { font-size: 40px; }            /* 1rem = 1 cm at real size */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f1ea; font-family: "Segoe UI", Arial, sans-serif; color: #222; }
+  .abs { position: absolute; }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+  .shadow { box-shadow: .12rem .18rem .35rem rgba(0,0,0,.35); }
+  .board { position: relative; width: 120rem; height: 90rem;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(0,0,0,.06) 0 .08rem, transparent .09rem) 0 0/.7rem .7rem,
+      radial-gradient(circle at 70% 60%, rgba(255,255,255,.08) 0 .06rem, transparent .07rem) 0 0/.5rem .5rem,
+      #b98c5d;
+    border: .9rem solid #5a4330; box-sizing: content-box; }
+  .dark { background: #1f262e; color: #efe6d2; }
+  .kicker { font-size: .39rem; letter-spacing: .08rem; text-transform: uppercase; font-weight: 600; }
+  .note-ph { position:absolute; font-size:.28rem; color:#a33; background:rgba(255,255,255,.9);
+    padding:.04rem .14rem; border:.03rem solid #a33; font-family:"Segoe UI",Arial; font-style:normal; font-weight:400; letter-spacing:0; line-height:1.25; }
+  .ph-box { border:.05rem dashed #a33; color:#a33; font-family:"Segoe UI",Arial; font-size:.3rem; display:flex; align-items:center; justify-content:center; text-align:center; line-height:1.3; padding:.2rem; }
+
+  /* shared: owner / loss / law chips (from the Morning Journal status chips) */
+  .chips { display:flex; gap:.25rem; align-items:center; flex-wrap:wrap; }
+  .chip { font-family:"Montserrat"; font-weight:700; font-size:.42rem; letter-spacing:.04rem; padding:.12rem .32rem; border-radius:1rem; border:.05rem solid currentColor; line-height:1; }
+  .chip.yes { color:#2f6b3a; background:#e6f0e2; }
+  .chip.no  { color:#b3261e; background:#f8e2df; }
+  .verdict { font-family:"Montserrat"; font-weight:700; font-size:.5rem; margin-left:.2rem; }
+
+  /* ---- CASE 1 · Ordinary theft · incident report (Boy Scouts form structure) ---- */
+  .rep { background:#fbfbf8; font-family:"Roboto",Arial,sans-serif; color:#1e2430; }
+  .rep p { font-size:.72rem; line-height:1.45; margin-bottom:.36rem; }
+  .rep .lt { font-weight:700; font-size:.54rem; line-height:1.25; }
+  .rep .lm { font-size:.42rem; color:#1d3b6a; margin:.08rem 0 .12rem; }
+  .rep .ld { font-size:.5rem; line-height:1.35; }
+  .rep .cap { font-family:"Montserrat"; font-weight:700; font-size:.36rem; letter-spacing:.08rem; text-transform:uppercase; color:#1d3b6a; }
+  .policeblue { background:#1d3b6a; color:#fff; }
+  .stamp { font-family:"League Spartan","Montserrat"; font-weight:700; color:#b3261e; border:.12rem solid #b3261e; border-radius:.2rem; padding:.12rem .35rem; transform:rotate(-6deg); display:inline-block; letter-spacing:.05rem; }
+
+  /* ---- CASE 2 · Kleptomania · Victorian (Claus Toys) ---- */
+  .vic { background: linear-gradient(160deg,#f6efdf 0%,#f1e8d4 60%,#ebdfc6 100%); font-family:"Unna",Georgia,serif; color:#2b2a26; }
+  .vic-frame { outline:.06rem solid #2f4a3a; outline-offset:-.45rem; }
+  .orn { background:url("assets/ornament_band.png") repeat-x center/auto 100%; }
+  .dip { font-family:"Diplomata SC",Georgia,serif; color:#2f4a3a; }
+  .vic .kick { font-size:.4rem; letter-spacing:.14rem; text-transform:uppercase; color:#8a5a2e; }
+  .vic p { font-size:.66rem; line-height:1.36; margin-bottom:.32rem; }
+  .vic .lt { font-weight:700; font-size:.56rem; line-height:1.25; }
+  .vic .lm { font-size:.44rem; color:#8a5a2e; margin:.08rem 0 .12rem; font-style:italic; }
+  .vic .ld { font-size:.54rem; line-height:1.3; }
+
+  /* ---- CASE 3 · Robin Hood · Morning Journal ---- */
+  .jour { background:#efe4d0; font-family:"Noticia Text",Georgia,serif; color:#22343a; }
+  .script { font-family:"French Script MT","Alex Brush","Segoe Script",cursive; color:#fff; text-shadow:0 0 .06rem rgba(31,59,68,.55), 0 .03rem .05rem rgba(0,0,0,.25); }
+  .jour p { font-size:.62rem; line-height:1.45; margin-bottom:.32rem; }
+  .jour .lt { font-weight:700; font-size:.5rem; line-height:1.25; }
+  .jour .lm { font-size:.4rem; color:#8a6a3a; margin:.06rem 0 .1rem; font-style:italic; }
+  .jour .ld { font-size:.46rem; line-height:1.32; }
+  .jchip { font-family:"Montserrat"; font-weight:700; font-size:.34rem; letter-spacing:.04rem; padding:.1rem .25rem; border-radius:1rem; color:#fff; display:inline-block; line-height:1.1; text-align:center; }
+
+  /* ---- CASE 4 · Benin · museum archive, bronze ---- */
+  .arc { background:#f6f1e8; font-family:"Noticia Text",Georgia,serif; color:#2e2118; }
+  .bronze { background:#7a4e26; color:#f6ead8; }
+  .arc p { font-size:.58rem; line-height:1.43; margin-bottom:.3rem; }
+  .arc .lt { font-weight:700; font-size:.5rem; line-height:1.25; }
+  .arc .lm { font-size:.4rem; color:#7a4e26; margin:.06rem 0 .1rem; font-style:italic; }
+  .arc .ld { font-size:.46rem; line-height:1.32; }
+  .arc .cap { font-family:"Montserrat"; font-weight:700; font-size:.3rem; letter-spacing:.1rem; text-transform:uppercase; color:#7a4e26; }
+
+  .view { position:relative; overflow:hidden; background:#f4f1ea; }
+  .stage { position:absolute; left:0; top:0; transform-origin:0 0; }
+  .vcap { font-size:18px; padding:10px 16px; font-weight:600; color:#333; }
+  .dim { position:absolute; font-size:1.1rem; color:#333; font-family:"Segoe UI",Arial; }
+  .anno { position:absolute; background:#c0392b; color:#fff; border-radius:.8rem; min-width:1.5rem; height:1.5rem; padding:0 .28rem;
+    font-size:.7rem; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:"Segoe UI",Arial; box-shadow:0 .05rem .15rem rgba(0,0,0,.4); z-index:5; }
+  .dnote { position:absolute; font-size:.42rem; color:#3a2a1a; line-height:1.35; font-family:"Segoe UI",Arial; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const R = 40;
+const COLW = 28.5;
+const COLX = [1, 30.83, 60.67, 90.5];
+
+/* ============================================================
+   TEXT (Phase 4)
+   ============================================================ */
+const INTRO = [
+  "Most people can picture a thief: someone who takes what belongs to another, without permission. The thief is usually the easiest person in the story to identify. The label seems to follow from the act. This section tests that idea through four cases.",
+  "Each case is checked against three conditions: an owner, a loss, and a law that names the taking as a crime. In an ordinary theft, all three are present, and so is the thief. Each case that follows keeps the taking in plain sight and changes something else.",
+  "Two women take the same goods from the same counter, but only one is called a thief. An outlaw robs travellers at knifepoint, and centuries of retelling turn him into a hero. A palace is looted, and its treasures pass through so many lawful hands that no single person seems to have taken them.",
+  "The taking stays visible throughout. What changes is who the taker is, who the victim is, where the goods end up, and how much time has passed. The label ‘thief’ turns out to depend on more than the act."
+];
+const ORD = [
+  "On a crowded street, a hand slips into a pocket and leaves with a wallet. The owner notices only later. A complaint is filed, and if the pickpocket is caught, the law takes its course. Cash, cards and jewellery are taken the same way.",
+  "In India, that law is Section 303 of the Bharatiya Nyaya Sanhita, 2023. It defines theft as dishonestly taking someone’s movable property out of their possession, without consent. The pickpocket’s act fits every part of that definition.",
+  "Owner, loss, law: all three are present, and the thief is obvious. Note the word <i>movable</i>. Under this section, land cannot be stolen at all — a limit Section 3 of this exhibition returns to."
+];
+const KLE = [
+  "From the 1870s, large department stores spread through American and British cities. Goods sat on open counters, and shoppers could handle them freely. Shoplifting rose with them. Many of those caught were middle-class women, the stores’ best customers, taking things they could easily afford. Doctors offered an explanation. Since the early nineteenth century, they had described ‘kleptomania’, an urge to steal. Applied to these women, it turned a crime into an illness. Stores, unwilling to lose respectable customers, often settled such cases quietly.",
+  "The diagnosis did not reach everyone. In New York in 1882, Ellen Sardy was caught in a Sixth Avenue department store with three pairs of hosiery and five pieces of silk. Her lawyer admitted the theft and asked for clemency because she had been ‘of weak mind’. The court accepted it and she went free. Historian Elaine Abelson, who recovered the case, writes that only middle-class women seemed to suffer from kleptomania: ‘stealing by members of other classes was simple theft’.",
+  "Owner and loss are identical in both cases, and so is the law. Only the person differs. The act did not decide the label; class did."
+];
+const ROB = [
+  "Robin Hood is first mentioned in the 1370s, when the poem <i>Piers Plowman</i> refers to ‘rhymes of Robin Hood’. The poem says nothing about who he was or what he did; it tells us only that such rhymes already circulated.",
+  "The earliest surviving ballads, from about 1450, describe an outlaw living in the forest with a band of followers, in conflict with a corrupt sheriff. He stops wealthy travellers on the road and takes what they carry at the point of a weapon. The ballads are frank about the violence, and they are also frank about what they do not say: they do not describe him giving to the poor. That line is first set down plainly by John Stow in 1592, roughly a century after <i>A Gest of Robyn Hode</i>, and it is the version that has lasted.",
+  "Owner, loss and law are all present. The travellers owned what they carried, they lost it, and Robin lived outside the law’s protection as a declared outlaw. Nothing is missing. What changed was not the robbery but the story told about it afterwards — and each retelling gave the robberies a better reason."
+];
+const BEN = [
+  "In 1897, a British punitive expedition captured Benin City, burned the royal palace and removed thousands of brass plaques, ivories and commemorative heads. Many were auctioned in London to defray the cost of the expedition itself. Others entered Western museums over the following decades through purchase, donation and transfer. These were not currency or raw material: the plaques were the palace’s own record of its dynasty, an archive kept in place.",
+  "Owner and loss are not in doubt. What is missing is the third condition. Each transfer was lawful where it took place, and every person in the chain can point to someone earlier. With no act the law named as a crime, the chain has no obvious thief — only a sequence of people who each acted correctly, and a benefit that passed down the line with the objects.",
+  "The question has since moved from who took the objects to who holds them now. In 2022 the Smithsonian transferred ownership of 29 objects to Nigeria’s National Commission for Museums and Monuments. In 2023 Nigeria’s outgoing president declared the Oba of Benin the owner of returned bronzes, and who should hold, keep and display them within Nigeria remains disputed. Returning an object settles ownership. It does not settle who is answerable for how it left."
+];
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function qrBlock(size, seed) {
+  let s = seed || 12345, cells = ""; const n = 21, c = size/n;
+  const rnd = () => (s = (s*16807) % 2147483647) / 2147483647;
+  for (let i=0;i<n;i++) for (let j=0;j<n;j++) {
+    const finder = (i<7&&j<7)||(i<7&&j>13)||(i>13&&j<7); let on;
+    if (finder) { const ii=i>13?i-14:i, jj=j>13?j-14:j; on = (ii==0||ii==6||jj==0||jj==6)||(ii>=2&&ii<=4&&jj>=2&&jj<=4); }
+    else on = rnd()>0.52;
+    if (on) cells += `<rect x="${j*c}" y="${i*c}" width="${c+.01}" height="${c+.01}"/>`;
+  }
+  return `<svg viewBox="0 0 ${size} ${size}" width="${size}rem" height="${size}rem"><rect width="${size}" height="${size}" fill="#fff"/><g fill="#111">${cells}</g></svg>`;
+}
+function greyLines(n, gap, h, col) { let o=""; for (let i=0;i<n;i++) o += `<div style="height:${h}rem;margin-bottom:${gap}rem;width:${i%5==4?60:100}%;background:${col||'rgba(60,50,40,.26)'}"></div>`; return o; }
+function tag(n, x, y) { return `<div class="anno" style="left:${x}rem;top:${y}rem">${n}</div>`; }
+function figure(fill, x, y, h, skirt) { // simple standing figure for storyboards
+  return `<svg class="abs" style="left:${x}rem;top:${y}rem;width:${h*0.5}rem;height:${h}rem" viewBox="0 0 50 100">
+    <circle cx="25" cy="12" r="9" fill="${fill}"/>${skirt?`<path d="M14 24 H36 L44 96 H6 Z" fill="${fill}"/>`:`<path d="M13 24 H37 V62 H33 V96 H27 V64 H23 V96 H17 V62 H13 Z" fill="${fill}"/>`}</svg>`;
+}
+function conditions(o,l,w,verdict){ const c=(t,ok)=>`<span class="chip ${ok?'yes':'no'}">${t} ${ok?'✓':'✗'}</span>`;
+  return `<div class="chips">${c("OWNER",o)}${c("LOSS",l)}${c("LAW",w)}<span class="verdict">${verdict}</span></div>`; }
+function qrStrip(X, y, bg, fg, accent, font, text, seed) {
+  return `<div class="abs shadow" style="left:${X}rem;top:${y}rem;width:${COLW}rem;height:4.6rem;background:${bg};color:${fg};display:flex;align-items:center;gap:.5rem;padding:.35rem .5rem;font-family:${font}">
+    <div style="padding:.1rem;background:#fff;flex:none">${qrBlock(3.7,seed)}</div>
+    <div style="font-size:.52rem;line-height:1.35">${text}</div></div>`;
+}
+function leaf(x,y,rot,scale){ return `<svg class="abs" style="left:${x}rem;top:${y}rem;width:${2.2*scale}rem;height:${1.4*scale}rem;transform:rotate(${rot}deg)" viewBox="0 0 44 28">
+  <path d="M2 14 H42" stroke="#1f3b44" stroke-width="1.2"/>${[8,16,24,32].map(x=>`<ellipse cx="${x}" cy="8" rx="4" ry="2" transform="rotate(-35 ${x} 8)" fill="#1f3b44"/><ellipse cx="${x+3}" cy="20" rx="4" ry="2" transform="rotate(35 ${x+3} 20)" fill="#1f3b44"/>`).join("")}</svg>`; }
+
+/* ============================================================
+   CASE 1 · ORDINARY THEFT  (incident report)
+   ============================================================ */
+function colOrdinary(X) {
+  const field = (k, v, ok) => `<div style="display:flex;border-bottom:.04rem solid #c9cfd9;padding:.3rem 0;align-items:baseline">
+    <div class="cap" style="width:6.6rem;flex:none">${k}</div><div style="flex:1;font-size:.58rem">${v}</div>
+    ${ok===undefined?'':`<div style="font-size:.5rem;font-weight:700;color:${ok?'#2f6b3a':'#b3261e'}">${ok?'✓':'✗'}</div>`}</div>`;
+  return `
+  <!-- O1 panel -->
+  <div class="abs rep shadow" style="left:${X}rem;top:11.5rem;width:${COLW}rem;height:26rem;overflow:hidden">
+    <div style="display:flex;height:4.3rem">
+      <div class="policeblue" style="width:4.3rem;display:flex;align-items:center;justify-content:center;font-family:'League Spartan';font-size:1.6rem">1</div>
+      <div style="flex:1;padding:.6rem .9rem 0;border-bottom:.08rem solid #1d3b6a">
+        <div class="cap">Section 1 · Case 1</div>
+        <div style="font-family:'League Spartan';font-weight:700;font-size:.95rem;line-height:1.05;margin-top:.2rem">ORDINARY THEFT</div></div>
+    </div>
+    <div style="padding:.5rem 1.1rem 0">
+      <div style="font-size:.48rem;color:#1d3b6a;font-weight:700;margin-bottom:.45rem">A wallet, taken on a crowded street · Present day</div>
+      ${ORD.map(p=>`<p>${p}</p>`).join("")}
+    </div>
+    <div class="abs" style="left:1.1rem;right:1.1rem;bottom:.8rem;border-top:.05rem dashed #1d3b6a;padding-top:.35rem">${conditions(true,true,true,"→ Thief: obvious")}</div>
+  </div>
+
+  <!-- O2 BNS 303 -->
+  <div class="abs rep shadow" style="left:${X}rem;top:39rem;width:${COLW}rem;height:12.6rem;padding:.6rem .9rem">
+    <div class="cap">Printed extract · Government of India</div>
+    <div style="font-family:'League Spartan';font-weight:700;font-size:.62rem;margin:.12rem 0 .3rem">BHARATIYA NYAYA SANHITA, 2023 · SECTION 303(1)</div>
+    <div style="position:relative;background:#fff;border-left:.18rem solid #1d3b6a;padding:.35rem .5rem;font-family:'Noticia Text',serif;font-size:.66rem;line-height:1.45">
+      “Whoever, intending to take dishonestly any <span style="background:#fde68a;font-weight:700">movable</span> property out of the possession of any person without that person’s consent, moves that property in order to such taking, is said to commit theft.”
+      <div class="note-ph" style="right:.1rem;bottom:-.35rem">check wording against the official Gazette text</div></div>
+    <div style="margin-top:.55rem">
+      <div class="lt">Section 303, Bharatiya Nyaya Sanhita</div>
+      <div class="lm">2023 · Printed extract · Government of India</div>
+      <div class="ld">India’s criminal code defines theft as dishonestly taking movable property from someone’s possession without consent. Movable is the key word: under this section, land cannot be stolen.</div></div>
+  </div>
+
+  <!-- O3 incident report -->
+  <div class="abs rep shadow" style="left:${X}rem;top:53.1rem;width:${COLW}rem;height:19.4rem;overflow:hidden">
+    <div class="policeblue" style="padding:.35rem .8rem;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:'League Spartan';font-weight:700;font-size:.62rem;letter-spacing:.04rem">INCIDENT REPORT</div>
+      <div style="font-size:.32rem;letter-spacing:.06rem">CASE 1 · FORM MADE FOR THIS EXHIBITION</div></div>
+    <div style="padding:.35rem .8rem">
+      ${field("Place / time","A crowded street, present day")}
+      ${field("Property","Wallet, cash, cards, jewellery: <b>movable</b>")}
+      ${field("Owner","Known: the person whose pocket it was",true)}
+      ${field("Loss","The owner no longer has it",true)}
+      ${field("Consent","None given",true)}
+      ${field("Law","Theft, BNS Section 303",true)}
+      ${field("Suspect","A pickpocket")}
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.45rem">
+        <div style="font-size:.46rem;color:#555;font-style:italic;width:15rem">Every later case in this section is checked against the same three lines: owner, loss, law.</div>
+        <div class="stamp" style="font-size:.82rem">THIEF: OBVIOUS</div></div>
+    </div>
+  </div>
+
+  <!-- O4 how to read -->
+  <div class="abs rep shadow" style="left:${X}rem;top:74.1rem;width:${COLW}rem;height:8.4rem;padding:.55rem .8rem;border-top:.25rem solid #1d3b6a">
+    <div style="font-family:'League Spartan';font-weight:700;font-size:.55rem;margin-bottom:.25rem">HOW TO READ THIS SECTION</div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:.25rem .4rem;align-items:center;font-size:.56rem">
+      <span class="chip yes">OWNER ✓</span><span>Someone the thing belongs to</span>
+      <span class="chip yes">LOSS ✓</span><span>They no longer have it</span>
+      <span class="chip yes">LAW ✓</span><span>A law names the taking as a crime</span></div>
+    <div style="font-size:.46rem;margin-top:.3rem;color:#555">Each case has this strip. Watch which one changes.</div>
+  </div>
+  ${qrStrip(X,84,"#1d3b6a","#fff","#fff","Roboto",`Listen &amp; see the sources<br><b>Audio guide · Case 1</b>`,101)}`;
+}
+
+/* ============================================================
+   CASE 2 · KLEPTOMANIA  (Victorian)
+   ============================================================ */
+function colKlepto(X) {
+  const frame = (x,y,n,txt,inner) => `<div class="abs" style="left:${x}rem;top:${y}rem;width:6.2rem;height:6.4rem;background:#fbf8f0;border:.05rem solid #2f4a3a;overflow:hidden">
+      <div class="abs" style="left:.1rem;top:.05rem;font-size:.28rem;font-weight:700;color:#8a5a2e">${n}</div>${inner}
+      <div class="abs" style="left:0;right:0;bottom:0;background:rgba(47,74,58,.9);color:#f6efdf;font-size:.32rem;padding:.06rem .12rem;line-height:1.2">${txt}</div></div>`;
+  return `
+  <!-- K1 panel -->
+  <div class="abs vic shadow vic-frame" style="left:${X}rem;top:11.5rem;width:${COLW}rem;height:26rem;padding:.8rem 1.1rem">
+    <div class="orn" style="height:.95rem;margin:0 -.3rem .35rem"></div>
+    <div class="kick">Section 1 · Case 2</div>
+    <div class="dip" style="font-size:.78rem;line-height:1.2;margin:.15rem 0 .15rem">Kleptomania and Class</div>
+    <div style="font-size:.44rem;font-style:italic;color:#8a5a2e;margin-bottom:.35rem;padding-bottom:.3rem;border-bottom:.04rem solid #c08a4f">Two shoplifters, one counter, two verdicts · Department stores in the United States and Britain, 1870s–1900s</div>
+    ${KLE.map(p=>`<p>${p}</p>`).join("")}
+    <div class="abs" style="left:1.1rem;right:1.1rem;bottom:.75rem;border-top:.05rem solid #2f4a3a;padding-top:.3rem">${conditions(true,true,true,"→ Thief: depends on who you are")}</div>
+  </div>
+
+  <!-- K2 two verdicts -->
+  <div class="abs vic shadow" style="left:${X}rem;top:39rem;width:${COLW}rem;height:17rem;padding:.6rem .8rem">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:.05rem solid #2f4a3a;padding-bottom:.15rem">
+      <div class="dip" style="font-size:.55rem">Same goods · Two verdicts</div><div class="kick" style="font-size:.32rem">Comparison</div></div>
+    <div style="display:flex;gap:.5rem;margin-top:.4rem">
+      <div style="flex:1;background:#fbf8f0;border:.05rem solid #c08a4f;padding:.4rem .5rem;height:10.6rem;position:relative">
+        <div class="kick" style="font-size:.3rem">New York · 1882</div>
+        <div style="font-size:.74rem;font-weight:700;margin:.1rem 0 .15rem">Ellen Sardy</div>
+        <div style="font-size:.58rem;line-height:1.35">Caught with three pairs of hosiery and five pieces of silk. Her lawyer: she was ‘of weak mind’.</div>
+        <div class="abs" style="left:.5rem;right:.5rem;bottom:.45rem;text-align:center"><div class="dip" style="font-size:.6rem;color:#2f6b3a">Kleptomania</div><div style="font-size:.52rem">She went free.</div></div>
+      </div>
+      <div style="flex:1;background:#fbf8f0;border:.05rem solid #c08a4f;padding:.4rem .5rem;height:10.6rem;position:relative">
+        <div class="kick" style="font-size:.3rem">The same counter</div>
+        <div style="font-size:.74rem;font-weight:700;margin:.1rem 0 .15rem">A working-class woman</div>
+        <div style="font-size:.58rem;line-height:1.35;font-style:italic">“Stealing by members of other classes was simple theft.” — Elaine Abelson</div>
+        <div class="ph-box" style="margin-top:.25rem;height:2rem">Add an authentic court record of a working-class shoplifter, if found</div>
+        <div class="abs" style="left:.5rem;right:.5rem;bottom:.45rem;text-align:center"><div class="dip" style="font-size:.6rem;color:#b3261e">Theft</div><div style="font-size:.52rem">Charged and prosecuted.</div></div>
+      </div>
+    </div>
+    <div style="font-size:.44rem;margin-top:.35rem"><b>Two verdicts (comparison)</b> · <i style="color:#8a5a2e">Made for this exhibition · Based on Elaine S. Abelson, When Ladies Go A-Thieving (1989)</i></div>
+  </div>
+
+  <!-- K3 Journal of Mental Science -->
+  <div class="abs vic shadow" style="left:${X}rem;top:57.5rem;width:13.9rem;height:25rem;padding:.55rem">
+    <div style="position:relative;background:#fbf8f0;border:.04rem solid #bbb;height:14.6rem;padding:.45rem .55rem">
+      <div style="text-align:center;font-size:.27rem;letter-spacing:.06rem">THE</div>
+      <div style="text-align:center;font-family:Georgia;font-weight:700;font-size:.5rem;line-height:1.1">JOURNAL OF<br>MENTAL SCIENCE</div>
+      <div style="text-align:center;font-size:.26rem;margin:.1rem 0 .3rem;border-bottom:.03rem solid #333;padding-bottom:.1rem">JULY 1862</div>
+      <div style="text-align:center;font-family:Georgia;font-size:.4rem;letter-spacing:.06rem;margin-bottom:.25rem">KLEPTOMANIA.</div>
+      ${greyLines(12,.12,.11)}
+      <div class="note-ph" style="left:.15rem;bottom:.15rem">PLACEHOLDER · print a reproduction of the article’s first page</div>
+    </div>
+    <div style="margin-top:.4rem">
+      <div class="lt">‘Kleptomania’, The Journal of Mental Science</div>
+      <div class="lm">July 1862 · British psychiatric journal · Reproduction</div>
+      <div class="ld">A British medical journal describing kleptomania as a disorder of the mind. Writing like this gave families and courts a medical account of shoplifting to set against a criminal one.</div></div>
+  </div>
+
+  <!-- K4 storyboard -->
+  <div class="abs vic shadow" style="left:${X+14.6}rem;top:57.5rem;width:13.9rem;height:25rem;padding:.55rem">
+    <div class="dip" style="font-size:.48rem;margin-bottom:.3rem">Two shoplifters</div>
+    <div style="position:relative;height:13.4rem">
+      ${frame(0,0,"1","A lady pockets silk",figure("#6b5a8a",2.4,.6,4.4,true))}
+      ${frame(6.6,0,"2","‘Kleptomania’ · settled quietly",figure("#6b5a8a",1.1,.6,4.4,true)+figure("#2f4a3a",3.4,.6,4.4,false))}
+      ${frame(0,6.9,"3","A working woman pockets the same silk",figure("#8a6a4a",2.4,.6,4.4,true))}
+      ${frame(6.6,6.9,"4","‘Theft’ · taken to court",figure("#8a6a4a",1.1,.6,4.4,true)+figure("#1f262e",3.4,.6,4.4,false))}
+    </div>
+    <div class="note-ph" style="position:relative;display:inline-block;margin:.1rem 0 .3rem">PLACEHOLDER · final drawings or stills</div>
+    <div class="lt">Two shoplifters (storyboard)</div>
+    <div class="lm">Made for this exhibition · Reconstruction</div>
+    <div class="ld">Two women take the same item from the same counter, and the verdicts differ. No footage of the original cases survives, so this scene was drawn by the exhibition team.</div>
+  </div>
+  ${qrStrip(X,84,"#2f4a3a","#f1e8d4","#e2b98a","Unna, serif",`Listen &amp; see the sources<br><span style="color:#e2b98a">Audio guide · Case 2 · storyboard and records</span>`,202)}`;
+}
+
+/* ============================================================
+   CASE 3 · ROBIN HOOD  (Morning Journal)
+   ============================================================ */
+function colRobin(X) {
+  const steps = [
+    ["1370s","Piers Plowman","MENTIONED","#8a8a8a","‘Rhymes of Robin Hood’ exist. Nothing more."],
+    ["c.1450","Robin Hood and the Monk","VIOLENT OUTLAW","#8e3b2e","Robs travellers at weapon-point."],
+    ["early 1500s","A Gest of Robyn Hode","HELPS A POOR KNIGHT","#b07a2a","Lends money. No ‘rich to poor’."],
+    ["1592","John Stow","ROBS THE RICH TO HELP THE POOR","#2f6b3a","The line that lasts."],
+    ["1922 · 1938","Fairbanks, Flynn","WRONGED NOBLEMAN","#1f3b44","Fights injustice on screen."],
+  ];
+  const extract = (title, meta, desc, ph) => `<div style="flex:1;display:flex;flex-direction:column">
+      <div style="position:relative;height:8rem;background:#fbf6ea;border:.04rem solid #b9a582;padding:.3rem">
+        ${greyLines(9,.12,.1,'rgba(40,52,58,.3)')}
+        <div class="note-ph" style="left:.1rem;bottom:.1rem">${ph}</div></div>
+      <div style="margin-top:.25rem"><div class="lt">${title}</div><div class="lm">${meta}</div><div class="ld">${desc}</div></div></div>`;
+  return `
+  <!-- RH1 panel -->
+  <div class="abs jour shadow" style="left:${X}rem;top:11.5rem;width:${COLW}rem;height:26rem;overflow:hidden">
+    <div style="position:relative;height:5.2rem;background:#dccbb0;padding:.4rem 1rem 0 1.1rem">
+      ${leaf(21.5,.4,-20,1.1)}${leaf(24.5,2.5,25,.9)}
+      <div style="font-family:Montserrat;font-weight:700;font-size:.32rem;letter-spacing:.08rem;color:#1f3b44">SECTION 1 · CASE 3</div>
+      <div class="script" style="font-size:1.55rem;line-height:1.1;margin-top:.35rem">Robbing</div>
+      <div style="font-family:'Noticia Text';font-size:.85rem;color:#1f3b44;line-height:1;margin:-.35rem 0 0 3.3rem">the Rich</div>
+    </div>
+    <div style="padding:.45rem 1.1rem 0">
+      <div style="font-size:.4rem;font-style:italic;color:#8a6a3a;margin-bottom:.35rem;padding-bottom:.25rem;border-bottom:.04rem solid #b9a582">Robin Hood and six centuries of retelling · England, 1370s to today</div>
+      ${ROB.map(p=>`<p>${p}</p>`).join("")}
+    </div>
+    <div class="abs" style="left:1.1rem;right:1.1rem;bottom:.75rem;border-top:.05rem solid #1f3b44;padding-top:.3rem">${conditions(true,true,true,"→ Thief, retold as hero")}</div>
+  </div>
+
+  <!-- RH2 retelling timeline -->
+  <div class="abs jour shadow" style="left:${X}rem;top:39rem;width:${COLW}rem;height:11.6rem;padding:.55rem .7rem">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <div style="font-family:'Noticia Text';font-size:.56rem;font-weight:700">Each retelling gave him a better reason</div>
+      <div style="font-family:Montserrat;font-weight:700;font-size:.28rem;letter-spacing:.06rem;color:#8a6a3a">TIMELINE</div></div>
+    <div style="position:relative;margin-top:.45rem;height:8.2rem">
+      <div class="abs" style="left:0;right:0;top:1.05rem;height:.08rem;background:#1f3b44"></div>
+      ${steps.map((s,i)=>`<div class="abs" style="left:${i*5.42}rem;top:0;width:5.2rem">
+          <div style="font-family:Montserrat;font-weight:700;font-size:.42rem;color:#1f3b44">${s[0]}</div>
+          <div style="width:.4rem;height:.4rem;border-radius:50%;background:#1f3b44;margin:.22rem 0 .25rem .1rem"></div>
+          <div style="font-size:.42rem;font-style:italic;line-height:1.2;height:1.05rem">${s[1]}</div>
+          <div class="jchip" style="background:${s[3]};margin:.15rem 0 .2rem">${s[2]}</div>
+          <div style="font-size:.42rem;line-height:1.3">${s[4]}</div></div>`).join("")}
+    </div>
+  </div>
+
+  <!-- RH3 ballads -->
+  <div class="abs jour shadow" style="left:${X}rem;top:52.1rem;width:${COLW}rem;height:15.6rem;padding:.55rem .6rem">
+    <div style="display:flex;gap:.4rem;height:100%">
+      ${extract("Robin Hood and the Monk","About 1450 · Ballad extract · Reproduction; original in Cambridge University Library","The oldest surviving Robin Hood ballad, and an openly violent one: Robin is betrayed and captured, and his men kill the monk who informed on him.","PLACEHOLDER · ballad extract")}
+      ${extract("A Gest of Robyn Hode","Printed in the early 1500s · Ballad extract · Reproduction","The longest early ballad. Robin helps a poor knight with a loan, but never robs the rich to give to the poor.","PLACEHOLDER · ballad extract")}
+      ${extract("John Stow, The Annales of England","1592 · Extract · Reproduction","The first known text to say plainly that Robin Hood robbed the rich to help the poor. The best-known part of the story is the latest addition.","PLACEHOLDER · Stow extract")}
+    </div>
+  </div>
+
+  <!-- RH4 film posters -->
+  <div class="abs jour shadow" style="left:${X}rem;top:69.2rem;width:${COLW}rem;height:13.3rem;padding:.55rem .7rem;display:flex;gap:.5rem">
+    <div class="ph-box" style="width:7.4rem;height:12.2rem;background:#e6d8be;flex:none">Film poster<br>1922<br>Douglas Fairbanks</div>
+    <div class="ph-box" style="width:7.4rem;height:12.2rem;background:#e6d8be;flex:none">Film poster<br>1938<br>Errol Flynn</div>
+    <div style="flex:1;padding-top:.2rem">
+      
+      <div class="lt" style="margin-top:.3rem">Robin Hood on screen</div>
+      <div class="lm">1922 and 1938 · Film posters · Reproductions</div>
+      <div class="ld">Posters for the Douglas Fairbanks (1922) and Errol Flynn (1938) films. In both, Robin is a wronged nobleman fighting injustice rather than an outlaw robbing travellers at knifepoint.</div></div>
+  </div>
+  ${qrStrip(X,84,"#1f3b44","#efe4d0","#dccbb0","'Noticia Text', serif",`Hear the ballads &amp; see the sources<br><span style="color:#dccbb0">Audio guide · Case 3</span>`,303)}`;
+}
+
+/* ============================================================
+   CASE 4 · BENIN BRONZES  (museum archive)
+   ============================================================ */
+const P = (pts) => pts.map(([lo,la]) => `${(lo+85).toFixed(1)},${(60-la).toFixed(1)}`).join(" ");
+const LAND = [
+  [[-77,8],[-72,12],[-62,11],[-52,5],[-50,0],[-80,0],[-80,1],[-77,4]],
+  [[-77,8],[-80,9],[-83,9],[-85,11],[-85,14],[-83,15],[-80,10]],
+  [[-85,30],[-82,26],[-80,26],[-81,31],[-76,35],[-74,40],[-70,42],[-66,44],[-60,46],[-53,47],[-56,52],[-60,55],[-64,60],[-85,60]],
+  [[-17,15],[-17,21],[-13,28],[-6,36],[10,37],[11,33],[20,31],[32,31],[34,28],[40,15],[40,0],[9,0],[9,4],[5,6],[-4,5],[-8,4],[-13,8]],
+  [[-9,37],[-9,43],[-2,43.5],[-1,46],[-4.5,48],[2,51],[5,53],[8,54],[8.5,57],[12,56],[14,54],[20,54.5],[24,57],[23,60],[40,60],[40,45],[30,45],[28,41],[26,40],[23,36.5],[21,38],[19,42],[14,45],[12.5,44],[16,40],[18,40],[16,38],[12,38],[13,41],[10,44],[7,43.5],[3,43],[0,39],[-2,37]],
+  [[-5.5,50],[1.5,51],[1.7,52.8],[0,54],[-1.5,55.5],[-2,57.5],[-4,58.6],[-5.5,57.5],[-5,55],[-3,54],[-3.2,53.3],[-4.6,52.8],[-5,51.7],[-3,51.4]],
+  [[-6,52],[-6,54.5],[-8,55.3],[-10,54],[-10,51.8]],
+  [[26,40],[28,41],[30,45],[40,45],[40,30],[35,28],[34,28],[35,36],[36,36.5],[30,36.5],[27,37]],
+];
+function beninMap() {
+  const xy = (lo,la) => [lo+85, 60-la];
+  const [bx,by]=xy(5.6,6.3), [lx,ly]=xy(-0.1,51.5), [ex,ey]=xy(13.4,52.5), [wx,wy]=xy(-77,38.9);
+  const dot=(x,y,n,dx,dy,anch,col)=>`<circle cx="${x}" cy="${y}" r="1.3" fill="${col||'#2e2118'}" stroke="#fff" stroke-width=".4"/><text x="${x+dx}" y="${y+dy}" font-size="3.4" font-family="Noticia Text, Georgia" font-weight="700" fill="#2e2118" text-anchor="${anch}">${n}</text>`;
+  const arrow=(x1,y1,x2,y2,c,w)=>`<path d="M${x1},${y1} Q${(x1+x2)/2+ (y2-y1)*.15},${(y1+y2)/2-(x2-x1)*.15} ${x2},${y2}" fill="none" stroke="${c}" stroke-width="${w}" marker-end="url(#ah)"/>`;
+  return `<svg viewBox="0 0 125 60" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+    <defs><marker id="ah" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#7a4e26"/></marker></defs>
+    <rect width="125" height="60" fill="#e5dccd"/>
+    ${LAND.map(p=>`<polygon points="${P(p)}" fill="#f4ecdf" stroke="#b39b7e" stroke-width=".3"/>`).join("")}
+    ${arrow(bx,by,lx+1,ly+1.5,"#7a4e26",1)}
+    ${arrow(lx,ly,ex-1,ey,"#7a4e26",.6)}${arrow(lx-1,ly,wx+1.5,wy-.5,"#7a4e26",.6)}
+    ${dot(bx,by,"Benin City, 1897",2,1,"start","#7a4e26")}
+    ${dot(lx,ly,"London · auction",-2,-1.8,"end")}
+    ${dot(ex,ey,"Berlin",2,-1,"start")}
+    ${dot(wx,wy,"Washington, DC",-1,4.2,"start")}
+    <text x="68" y="40" font-size="2.6" font-family="Noticia Text" font-style="italic" fill="#7a4e26">and other collections</text>
+  </svg>`;
+}
+function colBenin(X) {
+  const hands = [["Soldier","Carried a plaque out of the palace, following orders."],["Officer","Led an expedition authorised in London."],["Auction, London","Sold objects to pay for the expedition."],
+                 ["Dealer","Bought at auction. Lawful."],["Museum","Bought from the dealer. Lawful."],["Curator, 1950","Catalogued it. Took nothing."]];
+  const node=(h,i)=>`<div style="background:#fff;border:.05rem solid #b39b7e;padding:.22rem .3rem;height:3.25rem;position:relative">
+      <div style="font-family:Montserrat;font-weight:700;font-size:.27rem;color:#7a4e26">${i+1}</div>
+      <div style="font-weight:700;font-size:.48rem;line-height:1.1">${h[0]}</div><div style="font-size:.38rem;line-height:1.25;margin-top:.06rem">${h[1]}</div></div>`;
+  return `
+  <!-- B1 panel -->
+  <div class="abs arc shadow" style="left:${X}rem;top:11.5rem;width:${COLW}rem;height:26rem;overflow:hidden">
+    <div class="bronze" style="padding:.55rem 1.1rem .5rem">
+      <div style="font-family:Montserrat;font-weight:700;font-size:.3rem;letter-spacing:.1rem;color:#e8cfa6">SECTION 1 · CASE 4</div>
+      <div style="font-family:'Noticia Text';font-size:.95rem;line-height:1.05;margin-top:.15rem">The Benin Bronzes</div></div>
+    <div style="padding:.4rem 1.1rem 0">
+      <div style="font-size:.4rem;font-style:italic;color:#7a4e26;margin-bottom:.3rem;padding-bottom:.25rem;border-bottom:.04rem solid #b39b7e">Who exactly is the thief? · Benin City (now in Nigeria), 1897 to today</div>
+      ${BEN.map(p=>`<p>${p}</p>`).join("")}
+    </div>
+    <div class="abs" style="left:1.1rem;right:1.1rem;bottom:.7rem;border-top:.05rem solid #7a4e26;padding-top:.3rem">${conditions(true,true,false,"→ Thief: no one?")}</div>
+  </div>
+
+  <!-- B2 chain of hands -->
+  <div class="abs arc shadow" style="left:${X}rem;top:39rem;width:${COLW}rem;height:13.9rem;padding:.5rem .7rem">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <div style="font-family:'Noticia Text';font-size:.56rem;font-weight:700">The chain of hands</div><div class="cap">Diagram</div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem .5rem;margin-top:.3rem">${hands.map(node).join("")}</div>
+    <div style="font-size:.42rem;font-style:italic;margin-top:.25rem;color:#7a4e26">Each was lawful where it took place. Each can point to someone earlier.</div>
+    <div style="display:flex;gap:.3rem;margin-top:.22rem">
+      <div class="bronze" style="flex:1;padding:.15rem .3rem;font-size:.38rem;line-height:1.25"><b>2022</b> · Smithsonian transfers ownership of 29 objects to Nigeria’s NCMM</div>
+      <div class="bronze" style="flex:1;padding:.15rem .3rem;font-size:.38rem;line-height:1.25"><b>2023</b> · Oba of Benin declared owner; who holds them is disputed</div></div>
+    <div style="font-size:.36rem;margin-top:.15rem;color:#6b5a48"><b>The chain of hands (diagram)</b> · Made for this exhibition</div>
+  </div>
+
+  <!-- B3 plaque image -->
+  <div class="abs arc shadow" style="left:${X}rem;top:54.4rem;width:11rem;height:17.4rem;padding:.45rem">
+    <div class="ph-box" style="height:9.4rem;background:linear-gradient(160deg,#a8743f,#6d4421);color:#fbe9cf;border-color:#fbe9cf">Enlarged image of a brass palace plaque<br>(museum photo, with credit)</div>
+    <div style="margin-top:.3rem"><div class="lt">Brass plaque from the royal palace of Benin (image)</div>
+      <div class="lm">16th–17th century · Enlarged image · Original held in a museum collection</div>
+      <div class="ld">Cast by Benin’s royal guild of brass casters and fixed to the palace’s pillars, plaques like this recorded kings, warriors and court ceremonies. They were the palace’s archive, not decoration.</div></div>
+  </div>
+
+  <!-- B4 map -->
+  <div class="abs arc shadow" style="left:${X+11.6}rem;top:54.4rem;width:16.9rem;height:17.4rem;padding:.45rem .55rem">
+    <div style="font-family:'Noticia Text';font-size:.5rem;font-weight:700;margin-bottom:.2rem">From Benin City to the world</div>
+    <div style="height:8.6rem;border:.04rem solid #b39b7e">${beninMap()}</div>
+    <div class="note-ph" style="position:relative;display:inline-block;margin-top:.15rem">routes are schematic · add holdings from museums’ published records</div>
+    <div style="margin-top:.15rem"><div class="lt">From Benin City to the world (map)</div>
+      <div class="lm">Made for this exhibition · Based on museums’ published records</div>
+      <div class="ld">Where objects taken in 1897 are held today, traced through museums’ own published records. More than a century later, most of them are still outside Nigeria.</div></div>
+  </div>
+
+  <!-- B5 news -->
+  <div class="abs arc shadow" style="left:${X}rem;top:73.3rem;width:${COLW}rem;height:9.2rem;padding:.45rem .55rem;display:flex;gap:.4rem">
+    <div class="ph-box" style="width:7.6rem;height:8.3rem;background:#fff;flex:none">News report<br>October 2022<br>Smithsonian transfer</div>
+    <div class="ph-box" style="width:7.6rem;height:8.3rem;background:#fff;flex:none">News report<br>2023<br>Dispute over who holds the bronzes</div>
+    <div style="flex:1"><div class="lt">Returning the bronzes</div><div class="lm">2022–2023 · News reports · Reproductions</div>
+      <div class="ld">Reports on the Smithsonian’s transfer of 29 objects to Nigeria’s National Commission for Museums and Monuments in October 2022, and on the dispute since, over who within Nigeria should hold and display them.</div></div>
+  </div>
+  ${qrStrip(X,84,"#3b2a1e","#f6ead8","#e8cfa6","'Noticia Text', serif",`Listen &amp; see the sources<br><span style="color:#e8cfa6">Audio guide · Case 4</span>`,404)}`;
+}
+
+/* ============================================================
+   BOARD
+   ============================================================ */
+function board(showTags) {
+  let tags = "";
+  if (showTags) {
+    tags += tag("H",0,0);
+    const ys = { O:[11,38.5,52.6,73.6,83.5], K:[11,38.5,57,57,83.5], RH:[11,38.5,51.6,68.7,83.5], B:[11,38.5,53.9,53.9,72.8,83.5] };
+    const xs = { O:[0,0,0,0,0], K:[0,0,0,14.1,0], RH:[0,0,0,0,0], B:[0,0,0,11.1,0,0] };
+    [["O",0],["K",1],["RH",2],["B",3]].forEach(([p,c])=>ys[p].forEach((y,i)=>tags+=tag(p+(i+1),COLX[c]-.6+xs[p][i],y)));
+  }
+  return `
+  <div class="board">
+    <div class="abs dark shadow" style="left:1rem;top:1rem;width:118rem;height:9rem;padding:.9rem 1.3rem;display:flex;gap:1.4rem">
+      <div style="width:27rem;flex:none">
+        <div class="kicker" style="color:#c9a36a">Section 1</div>
+        <div class="serif" style="font-size:1.75rem;line-height:1.1;margin:.15rem 0 .25rem">Who Is the Thief?</div>
+        <div style="font-size:.5rem;color:#c9b998">Four cases · owner, loss, law</div></div>
+      <div style="column-count:3;column-gap:1.3rem;font-size:.6rem;line-height:1.4;color:#e9e0cc;padding-top:.1rem">
+        ${INTRO.map(p=>`<p style="margin-bottom:.22rem">${p}</p>`).join("")}</div>
+    </div>
+    ${colOrdinary(COLX[0])}${colKlepto(COLX[1])}${colRobin(COLX[2])}${colBenin(COLX[3])}
+    ${tags}
+  </div>`;
+}
+
+/* ============================================================
+   DESK  (120 x 60, four quarters of 30 cm)
+   ============================================================ */
+function votingStrip(X) {
+  const pins = [[2.5,"#c0392b"],[5.4,"#2e6da4"],[6.1,"#e1b12c"],[8.6,"#2e8b57"]];
+  const ticks = Array.from({length:11},(_,i)=>{ const x = 1.5 + i*2.5;
+    return `<div class="abs" style="left:${x}rem;top:0;width:.06rem;height:${i%5==0?1.2:.8}rem;background:#1f262e"></div>
+      <div class="abs" style="left:${x-.3}rem;top:1.3rem;width:.6rem;text-align:center;font-size:.38rem;font-weight:700">${i}</div>`; }).join("");
+  return `
+    <div class="abs shadow" style="left:${X+1}rem;top:52rem;width:28rem;height:6rem;background:radial-gradient(circle at 30% 40%,rgba(0,0,0,.08) 0 .05rem,transparent .06rem) 0 0/.4rem .4rem,#c79f6e;border:.08rem solid #6b4a2b">
+      <div class="abs" style="left:1.5rem;top:2.9rem;width:25rem;height:.1rem;background:#1f262e"></div>
+      <div class="abs" style="left:0;top:.5rem;width:28rem">${ticks}</div>
+      <div class="abs" style="left:.3rem;top:3.9rem;font-size:.4rem;font-weight:700">0 · Not theft</div>
+      <div class="abs" style="right:.3rem;top:3.9rem;font-size:.4rem;font-weight:700">Theft · 10</div>
+      ${pins.map(([v,c])=>`<div class="abs" style="left:${1.5+v*2.5-.4}rem;top:2.55rem;width:.8rem;height:.8rem;border-radius:50%;background:${c};box-shadow:0 .08rem .14rem rgba(0,0,0,.55)"></div>`).join("")}
+    </div>
+    <div class="abs shadow" style="left:${X+1}rem;top:40.5rem;width:19.5rem;height:9.6rem;background:#1f262e;color:#efe6d2;padding:.6rem .75rem">
+      <div class="serif" style="font-size:.85rem;color:#c9a36a">Theft or not?</div>
+      <div style="font-size:.5rem;line-height:1.38;margin-top:.2rem">Place one pin on the line where you think this case belongs. 0 means ‘not theft’; 10 means ‘theft’. The line is continuous because many cases here do not fit a yes-or-no answer. The first few pins were placed by the exhibition team at the opening. Each evening, the strip is photographed and added to the digital catalogue.</div></div>
+    <div class="abs shadow" style="left:${X+21.6}rem;top:42rem;width:6.4rem;height:6.4rem;border-radius:50%;background:radial-gradient(circle,#e9e4da 55%,#bdb6a8);border:.12rem solid #8e8577"></div>
+    ${[[23.8,44,"#c0392b"],[25,45,"#2e6da4"],[24.2,46,"#e1b12c"],[25.5,43.8,"#2e8b57"],[23.3,45.3,"#2e6da4"]].map(([x,y,c])=>`<div class="abs" style="left:${X+x}rem;top:${y}rem;width:.75rem;height:.75rem;border-radius:50%;background:${c}"></div>`).join("")}`;
+}
+function deskOrdinary(X) {
+  const tent=(n,x,y)=>`<div class="abs" style="left:${X+x}rem;top:${y}rem;width:1.3rem;height:1.1rem;background:#f5c518;border:.05rem solid #8a6d00;font-family:Montserrat;font-weight:700;font-size:.55rem;display:flex;align-items:center;justify-content:center">${n}</div>`;
+  return `
+    <div class="abs" style="left:${X+2}rem;top:2.5rem;width:26rem;height:16rem;background:#3a3f47;border-radius:.2rem"></div>
+    <div class="abs shadow" style="left:${X+4}rem;top:5rem;width:9.5rem;height:7.5rem;background:linear-gradient(135deg,#6b3f22,#4a2a16);border-radius:.4rem"></div>
+    <div class="abs" style="left:${X+12.5}rem;top:6rem;width:7rem;height:3.4rem;background:#9fc5a8;transform:rotate(-12deg);border:.05rem solid #6c8f74"></div>
+    <div class="abs" style="left:${X+13.5}rem;top:7.5rem;width:7rem;height:3.4rem;background:#c9b7e2;transform:rotate(6deg);border:.05rem solid #8f7fae"></div>
+    <div class="abs" style="left:${X+5}rem;top:13.4rem;width:5.4rem;height:3.4rem;background:#2e6da4;border-radius:.3rem"></div>
+    <div class="abs" style="left:${X+11}rem;top:13.8rem;width:5.4rem;height:3.4rem;background:#d9a441;border-radius:.3rem"></div>
+    <div class="abs" style="left:${X+19.5}rem;top:12.6rem;width:4.4rem;height:4.4rem;border-radius:50%;border:.35rem solid #d4af37"></div>
+    <div class="abs" style="left:${X+24.2}rem;top:14.2rem;width:1.8rem;height:1.8rem;border-radius:50%;border:.25rem solid #c0c0c0"></div>
+    ${tent(1,3,3)}${tent(2,20.5,4.2)}${tent(3,4.5,16.3)}${tent(4,22.2,10.3)}
+    <div class="dnote" style="left:${X+.6}rem;top:18.8rem;width:28rem">Grey mat as an evidence table; yellow number tents 1–4 (wallet, cash, cards, jewellery). All props.</div>
+    <div class="abs rep shadow" style="left:${X+5}rem;top:21rem;width:20rem;height:5.6rem;padding:.4rem .55rem;border-top:.25rem solid #1d3b6a">
+      <div class="lt">Wallet, cash, cards and jewellery</div><div class="lm">Present day · Props</div>
+      <div class="ld" style="font-size:.48rem">Everyday objects of the kind taken in street theft. They are here to fix the familiar case in mind before the rest of the exhibition takes it apart.</div></div>
+    ${votingStrip(X)}`;
+}
+function deskKlepto(X) {
+  const tray=(x,tagTxt,col)=>`
+    <div class="abs shadow" style="left:${X+x}rem;top:3rem;width:12rem;height:9rem;background:#e9e2d2;border:.12rem solid #b8a98a;border-radius:.2rem"></div>
+    <div class="abs" style="left:${X+x+2}rem;top:4.6rem;width:8rem;height:5rem;background:linear-gradient(135deg,#d9c8e6,#b9a3cf);border-radius:.15rem;transform:rotate(-4deg)"></div>
+    <div class="abs vic shadow" style="left:${X+x+1}rem;top:10.4rem;width:10rem;height:2.6rem;padding:.2rem .3rem;border-left:.2rem solid ${col};font-size:.46rem;line-height:1.25">${tagTxt}</div>`;
+  return `
+    ${tray(2,"<b>Verdict:</b> kleptomania<br>Settled privately","#2f6b3a")}
+    ${tray(16,"<b>Verdict:</b> theft<br>Prosecuted","#b3261e")}
+    <div class="dnote" style="left:${X+.6}rem;top:13.6rem;width:28rem">Two trays, each with an identical folded piece of silk and a luggage-style verdict tag.</div>
+    <div class="abs vic shadow" style="left:${X+5}rem;top:15.6rem;width:20rem;height:5.6rem;padding:.35rem .55rem">
+      <div class="orn" style="height:.5rem;margin:0 -.3rem .2rem"></div>
+      <div class="lt" style="font-size:.54rem">Two pieces of silk</div><div class="lm" style="font-size:.42rem">Props · Made for this exhibition</div>
+      <div class="ld" style="font-size:.5rem">The same goods, as in the Ellen Sardy case. One taker was called ill; the other, a thief.</div></div>
+    ${votingStrip(X)}`;
+}
+function deskRobin(X) {
+  const hat=(x,y,r,c)=>`<svg class="abs" style="left:${X+x}rem;top:${y}rem;width:3.2rem;height:2rem;transform:rotate(${r}deg)" viewBox="0 0 32 20"><path d="M1 18 Q16 -6 31 14 Q16 12 1 18 Z" fill="${c}" stroke="#14301f" stroke-width=".6"/><path d="M20 8 L30 1" stroke="#b02a2a" stroke-width="1.4"/></svg>`;
+  return `
+    <div class="abs shadow" style="left:${X+7}rem;top:3rem;width:16rem;height:11rem;border-radius:50%;background:repeating-linear-gradient(45deg,#b8894d 0 .3rem,#9c7038 .3rem .6rem);border:.3rem solid #7a5426"></div>
+    ${hat(10,5.5,-10,"#3f7a3a")}${hat(13.5,6.5,15,"#2f6b3a")}${hat(16.5,5,-25,"#4d8a44")}${hat(11.5,8.8,5,"#356f33")}${hat(15,9.5,-5,"#3f7a3a")}
+    <div class="dnote" style="left:${X+.6}rem;top:14.6rem;width:28rem">Basket of folded paper Robin Hood hats (optional souvenir, Phase 3)</div>
+    <div class="abs jour shadow" style="left:${X+6}rem;top:16.6rem;width:18rem;height:3.6rem;padding:.35rem .6rem;text-align:center">
+      <div class="script" style="color:#1f3b44;font-size:1.1rem;line-height:1">Take a hat</div>
+      <div style="font-size:.44rem">Free · made by the exhibition team</div></div>
+    ${votingStrip(X)}`;
+}
+function deskBenin(X) {
+  return `
+    <div class="abs shadow" style="left:${X+8}rem;top:2.5rem;width:14rem;height:14rem;background:#1b1b1b;border-radius:.2rem"></div>
+    <div class="abs" style="left:${X+10.5}rem;top:3.6rem;width:9rem;height:11.6rem;background:linear-gradient(160deg,#b07c45,#7a4e26 60%,#5a3618);border-radius:.15rem;box-shadow:inset 0 0 .4rem rgba(0,0,0,.5)"></div>
+    <div class="abs" style="left:${X+13.4}rem;top:5rem;width:3.2rem;height:3.2rem;border-radius:50%;background:rgba(255,230,190,.25)"></div>
+    <div class="abs" style="left:${X+12.6}rem;top:8.4rem;width:4.8rem;height:5.6rem;background:rgba(255,230,190,.18);border-radius:1rem 1rem .2rem .2rem"></div>
+    <div class="dnote" style="left:${X+.6}rem;top:17rem;width:28rem">Optional (Phase 3, “if feasible”): a handmade replica plaque on a riser. If not made, leave the riser off and rely on the enlarged image on the wall.</div>
+    <div class="abs arc shadow" style="left:${X+5}rem;top:19.6rem;width:20rem;height:5.2rem;padding:.35rem .55rem;border-top:.25rem solid #7a4e26">
+      <div class="lt">Handmade plaque (replica)</div><div class="lm">Made for this exhibition · Not an original</div>
+      <div class="ld">A copy made by the exhibition team, so visitors can see a plaque’s size and depth of relief.</div></div>
+    ${votingStrip(X)}`;
+}
+function desk(showTags) {
+  let tags = "";
+  if (showTags) [["O",0],["K",30],["RH",60],["B",90]].forEach(([p,o])=>{
+    tags += tag(p+"6",o+1.2,1.8) + tag(p+"7",o+4.4,p=="O"?20.4:p=="K"?15:p=="RH"?16:19) + tag(p+"8",o+.4,39.9) + tag(p+"9",o+21,41.4) + tag(p+"10",o+.4,51.4); });
+  return `
+  <div style="position:relative;width:120rem;height:60rem;background:linear-gradient(90deg,#d8c3a0,#cfb894 50%,#d8c3a0);border:.15rem solid #7b6244">
+    <div class="abs" style="left:0;top:-.1rem;width:120rem;height:.5rem;background:#5a4330"></div>
+    <div class="dnote" style="left:.6rem;top:.6rem;font-weight:600;font-size:.4rem;color:#5a4330">WALL / BOARD SIDE ↑</div>
+    <div class="dnote" style="left:.6rem;top:58.7rem;font-weight:600;font-size:.4rem;color:#5a4330">VISITOR SIDE ↓</div>
+    ${[30,60,90].map(x=>`<div class="abs" style="left:${x}rem;top:0;height:60rem;border-left:.12rem dashed #5a4330"></div>`).join("")}
+    ${[["Case 1 · Ordinary theft",0],["Case 2 · Kleptomania",30],["Case 3 · Robin Hood",60],["Case 4 · Benin Bronzes",90]].map(([t,o])=>`<div class="dnote" style="left:${o+1}rem;top:33rem;font-size:.55rem;font-weight:700;color:#7b6244;opacity:.85">${t}</div>`).join("")}
+    ${deskOrdinary(0)}${deskKlepto(30)}${deskRobin(60)}${deskBenin(90)}
+    ${tags}
+  </div>`;
+}
+
+/* ============================================================
+   ELEVATION
+   ============================================================ */
+function elevation() {
+  const F = 195, bx = 12, deskTop = F-75, boardTop = F-180;
+  return `
+  <div style="position:relative;width:180rem;height:200rem;background:#ece8df">
+    <div class="abs" style="left:0;top:0;width:180rem;height:${F}rem;background:#e4dfd3"></div>
+    <div class="abs" style="left:0;top:${F}rem;width:180rem;height:5rem;background:#9a9184"></div>
+    <div class="abs" style="left:${bx-.9}rem;top:${boardTop-.9}rem">${board(false)}</div>
+    <div class="abs" style="left:${bx}rem;top:${deskTop}rem;width:120rem;height:3rem;background:#7b6244"></div>
+    <div class="abs" style="left:${bx+2}rem;top:${deskTop+3}rem;width:3rem;height:72rem;background:#5d4a35"></div>
+    <div class="abs" style="left:${bx+115}rem;top:${deskTop+3}rem;width:3rem;height:72rem;background:#5d4a35"></div>
+    <div class="abs" style="left:${bx+2}rem;top:${deskTop-1}rem;width:26rem;height:1rem;background:#3a3f47"></div>
+    <div class="abs" style="left:${bx+4}rem;top:${deskTop-3}rem;width:9.5rem;height:2rem;background:#5a3420"></div>
+    <div class="abs" style="left:${bx+32}rem;top:${deskTop-1.5}rem;width:12rem;height:1.5rem;background:#b8a98a"></div><div class="abs" style="left:${bx+46}rem;top:${deskTop-1.5}rem;width:12rem;height:1.5rem;background:#b8a98a"></div>
+    <div class="abs" style="left:${bx+67}rem;top:${deskTop-8}rem;width:16rem;height:8rem;background:repeating-linear-gradient(45deg,#b8894d 0 .5rem,#9c7038 .5rem 1rem);border-radius:0 0 3rem 3rem"></div>
+    <div class="abs" style="left:${bx+98}rem;top:${deskTop-8}rem;width:14rem;height:8rem;background:#1b1b1b"></div>
+    <div class="abs" style="left:${bx+100.5}rem;top:${deskTop-19.6}rem;width:9rem;height:11.6rem;background:linear-gradient(160deg,#b07c45,#7a4e26 60%,#5a3618)"></div>
+    ${[0,30,60,90].map(o=>`<div class="abs" style="left:${bx+o+1}rem;top:${deskTop-.6}rem;width:28rem;height:.6rem;background:#c79f6e"></div>
+       <div class="abs" style="left:${bx+o+21.6}rem;top:${deskTop-3.6}rem;width:6.4rem;height:3.6rem;background:#d9d3c7;border-radius:0 0 1.4rem 1.4rem"></div>`).join("")}
+    ${[[5,"#1d3b6a"],[35,"#2f4a3a"],[66,"#1f3b44"],[95,"#7a4e26"]].map(([o,c])=>`<div class="abs" style="left:${bx+o}rem;top:${deskTop-5.4}rem;width:20rem;height:5rem;background:#f6efdf;border-top:.3rem solid ${c};opacity:.95"></div>`).join("")}
+    <svg class="abs" style="left:136rem;top:${F-170}rem;width:46rem;height:170rem" viewBox="0 0 46 170">
+      <g fill="#6f7a86"><ellipse cx="23" cy="11.5" rx="8" ry="11"/><rect x="19.5" y="21" width="7" height="5"/>
+        <path d="M5 28 Q23 24 41 28 L45 92 L40 93 L36 46 L35 98 L34 168 L25 168 L23 104 L21 168 L12 168 L11 98 L10 46 L6 93 L1 92 Z"/></g></svg>
+    <div class="dim" style="left:${bx}rem;top:${boardTop-5}rem;width:120rem;text-align:center;border-bottom:.12rem solid #333;padding-bottom:.3rem">← 120 cm board · four cases, ~30 cm each →</div>
+    ${[[0,"0"],[75,"75 cm desk top"],[90,"≈90 cm board bottom"],[180,"≈180 cm board top"],[155,"≈155 cm eye level"]].map(([h,t])=>`
+      <div class="abs" style="left:0;top:${F-h}rem;width:${h==155?180:11}rem;border-top:.12rem ${h==155?'dashed #c0392b':'solid #333'}"></div>
+      <div class="dim" style="left:${h==155?131:0.3}rem;top:${F-h-1.6}rem;font-size:1rem;${h==155?'color:#c0392b':''}">${t}</div>`).join("")}
+    <div class="dim" style="left:149rem;top:${F-176}rem;font-size:1rem">170 cm visitor</div>
+  </div>`;
+}
+
+/* ============================================================
+   VIEWS
+   ============================================================ */
+const VIEWS = {
+  board:    {x0:-.9, y0:-.9, w:121.8, h:91.8, s:14/R, html:()=>board(true), cap:"Whole board · Section 1"},
+  ordinary: {x0:-.9, y0:-.9, w:31,   h:91.8, s:28/R, html:()=>board(true), cap:"Case 1 · Ordinary theft"},
+  klepto:   {x0:29.8,y0:-.9, w:30.6, h:91.8, s:28/R, html:()=>board(true), cap:"Case 2 · Kleptomania and class"},
+  robin:    {x0:59.7,y0:-.9, w:30.6, h:91.8, s:28/R, html:()=>board(true), cap:"Case 3 · Robbing the rich"},
+  benin:    {x0:89.5,y0:-.9, w:31.4, h:91.8, s:28/R, html:()=>board(true), cap:"Case 4 · The Benin Bronzes"},
+  desk:     {x0:-.5, y0:-1, w:121, h:62, s:14/R, html:()=>desk(true), cap:"Desk · top-down plan"},
+  deskL:    {x0:-.5, y0:-1, w:61,  h:62, s:20/R, html:()=>desk(true), cap:"Desk · cases 1 and 2"},
+  deskR:    {x0:59.5,y0:-1, w:61,  h:62, s:20/R, html:()=>desk(true), cap:"Desk · cases 3 and 4"},
+  elev:     {w:180, h:200, s:7/R, html:()=>elevation(), cap:"Front elevation (assumed mounting heights)"},
+};
+function render(key) {
+  const v = VIEWS[key]; const W = Math.round(v.w*v.s*R), H = Math.round(v.h*v.s*R);
+  const ox = -(v.x0||0)*R*v.s, oy = -(v.y0||0)*R*v.s;
+  return `<div class="view" style="width:${W}px;height:${H}px"><div class="stage" style="transform:translate(${ox}px,${oy}px) scale(${v.s})">${v.html()}</div></div>`;
+}
+const key = location.hash.slice(1);
+const root = document.getElementById("root");
+if (VIEWS[key]) root.innerHTML = render(key);
+else root.innerHTML = Object.keys(VIEWS).map(k => `<div class="vcap">${VIEWS[k].cap}</div>${render(k)}`).join('<div style="height:30px"></div>');
+</script>
+</body>
+</html>
