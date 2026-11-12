@@ -225,10 +225,11 @@ Layout source: `Section2_Full_Layout/section2_layout.html` (tags R1–R12, H1–
 
 ### 02 · What the Blood Was For (Havasupai)
 
-**Wall text (H1), revised 12 Nov 2026.**
-- "Type 2 diabetes was common in the tribe and growing, and its members wanted answers and help": Wikipedia, "Havasupai Tribe v. the Arizona Board of Regents" (high rates of type II diabetes; the tribe's concern about rising rates). Secondary source: check against Mello & Wolf, *NEJM* 362 (2010), or Amy Harmon, *New York Times*, 21 Apr 2010, before printing.
-- "Proposed a diabetes project … help address diabetes … attend its classes for free": the Joint Answering Brief, p. 3 (the Tribe's complaint, ¶¶ 30–32), and the Tribe's notice of claim quoted in the brief ("a diabetes education, nutrition and genetics research project").
-- "ASU's researchers say these studies belonged to the same research …": Dr Markow's declaration, quoted in the brief, footnote 3 and p. 4 (the script read to donors: "factors that cause some of the health problems experienced by the Havasupai … diabetes, schizophrenia, depression …").
+**Wall text (H1), revised 12 Nov 2026.** Base text is the Phase 4 document. Added facts and where they come from:
+- Diabetes "from the 1960s … amputations, even among the young … dialysis", and Rex Tilousi asking John Martin in late 1989 whether he knew a doctor who could help: Amy Harmon, *New York Times*, 21 April 2010, via NBC: https://www.nbcnews.com/id/wbna36705709 (already in the Phase 4 source list).
+- "The researchers saw these as part of the same search for what causes disease": the script Dr Markow said donors were read, quoted in the Joint Answering Brief, footnote 3 and p. 4 ("…diseases, such as diabetes, schizophrenia, depression…"); the same NYT article on inbreeding as "a measure that can correspond with a higher susceptibility to disease".
+- Markow's defence (progress through studies not tied to one disease): same NYT article.
+- Martin and Markow's diabetes-centred project: Embryo Project, https://embryo.asu.edu/pages/havasupai-tribe-v-arizona-board-regents-2008
 
 **Court record (H3).** Joint Answering Brief of the defendants (Therese Markow and the Arizona Board of Regents), *Havasupai Tribe v. Arizona State University Board of Regents*, Arizona Court of Appeals, Division One, No. 1 CA-CV 07-0454 (2007).
 - Original posted by Turtle Talk (turtletalk.blog), fetched through the Wayback Machine because the live site returns 403: `https://web.archive.org/web/20260901003820/https://turtletalk.blog/wp-content/uploads/2008/12/joint-answering-brief.pdf`.
