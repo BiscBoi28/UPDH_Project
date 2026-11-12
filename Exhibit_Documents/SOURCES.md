@@ -214,16 +214,21 @@ Layout source: `Section2_Full_Layout/section2_layout.html` (tags R1–R12, H1–
 **Brazil's verdict (R4).** Carlos Haag, "As sementes da discórdia", *Pesquisa FAPESP* no. 158, April 2009, pp. 22–25.
 - The real print pages come as a PDF linked from the article page: `https://revistapesquisa.fapesp.br/wp-content/uploads/2009/04/As-sementes-da-discórdia.pdf`. The web article is at `https://revistapesquisa.fapesp.br/as-sementes-da-discordia/`.
 - The board shows the title and the opening column, with the passage "Por décadas discutiu-se … 'pai da biopirataria'" highlighted (positions from `pdftotext -bbox`). It also shows the photo "Henry Wickham: ladrão ou herói?".
-- The English is the magazine's **own** English edition: `https://revistapesquisa.fapesp.br/en/the-seeds-of-discord/`.
+- The English is the magazine's **own** English edition: `https://revistapesquisa.fapesp.br/en/the-seeds-of-discord/`. Printed unedited from that page (browser print, 12 Nov 2026) as `DESK_R10_magazine_Pesquisa-FAPESP-2009_The-seeds-of-discord_ENGLISH.pdf`, kept next to the Portuguese pages so visitors can read the whole article in English.
 - Licence: CC BY-NC-ND (stated on the article page). It is reproduced unedited, with credit.
 - The full 4-page PDF is the desk copy `DESK_R10`.
 - Not found: Wickham's 1908 book (the "exceedingly delicate botanical specimens" account) has no free scan on the Internet Archive, BHL or Open Library. The FAPESP pages quote the same customs story.
 
-**Map (R5).** The same Berghaus 1897 world map as Section 1, cropped from Brazil to Malaya. Unmarked: the team draws the route by hand. The mock-up's drawn map was replaced.
+**Map (R5).** The same Berghaus 1897 world map as Section 1, cropped from Brazil to Malaya. The route is printed over it (revised 12 Nov 2026): seeds, 1876, Tapajós (Santarém) → Belém → Liverpool → Kew, dashed; seedlings from 1876, Kew → Ceylon → Malaya (Singapore), solid. Stops are placed by latitude and longitude on the map's Mercator grid. The sea lanes are drawn schematically (the Kew–Ceylon line runs through Suez); the legend names only the stops.
 
 **Made for the exhibition.** R1 (wall text), R2 (timeline drawn to scale), R6 (map label), R9 (seed tent card).
 
 ### 02 · What the Blood Was For (Havasupai)
+
+**Wall text (H1), revised 12 Nov 2026.**
+- "Type 2 diabetes was common in the tribe and growing, and its members wanted answers and help": Wikipedia, "Havasupai Tribe v. the Arizona Board of Regents" (high rates of type II diabetes; the tribe's concern about rising rates). Secondary source: check against Mello & Wolf, *NEJM* 362 (2010), or Amy Harmon, *New York Times*, 21 Apr 2010, before printing.
+- "Proposed a diabetes project … help address diabetes … attend its classes for free": the Joint Answering Brief, p. 3 (the Tribe's complaint, ¶¶ 30–32), and the Tribe's notice of claim quoted in the brief ("a diabetes education, nutrition and genetics research project").
+- "ASU's researchers say these studies belonged to the same research …": Dr Markow's declaration, quoted in the brief, footnote 3 and p. 4 (the script read to donors: "factors that cause some of the health problems experienced by the Havasupai … diabetes, schizophrenia, depression …").
 
 **Court record (H3).** Joint Answering Brief of the defendants (Therese Markow and the Arizona Board of Regents), *Havasupai Tribe v. Arizona State University Board of Regents*, Arizona Court of Appeals, Division One, No. 1 CA-CV 07-0454 (2007).
 - Original posted by Turtle Talk (turtletalk.blog), fetched through the Wayback Machine because the live site returns 403: `https://web.archive.org/web/20260901003820/https://turtletalk.blog/wp-content/uploads/2008/12/joint-answering-brief.pdf`.

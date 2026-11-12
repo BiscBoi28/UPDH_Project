@@ -33,8 +33,8 @@ RUB = [
     "In Brazil, Wickham is remembered as “the father of bio-piracy”: someone who profited from Brazil’s plants without its consent. Wickham called it patriotism. No Brazilian law in 1876 banned taking the seeds, Brazil kept its trees, and the plantations took decades of work to succeed. Britain knighted him in 1920.",
 ]
 HAV = [
-    "The Havasupai are a Native American tribe of about 650 people, living deep in the Grand Canyon. From 1990, researchers from Arizona State University (ASU) collected blood from more than 200 members. Tribal leaders were told the study was about diabetes; the written consent form spoke more broadly, of “behavioral/medical disorders”.",
-    "The samples were used in 23 papers and dissertations. Fifteen had nothing to do with diabetes; they covered schizophrenia, inbreeding and the tribe’s origins. One suggested its ancestors came from Asia, while the tribe’s own history says they began in the canyon. Tribal council member Carletta Tilousi said: “people got degrees and grants, and they never asked our permission.”",
+    "The Havasupai are a Native American tribe of about 650 people, living deep in the Grand Canyon. By 1990 type 2 diabetes was common in the tribe and growing, and its members wanted answers and help. That year researchers from Arizona State University (ASU) proposed a diabetes project. Tribal leaders agreed on the understanding that it was a study to help address diabetes; in exchange, ASU let tribal members attend its classes for free. The researchers collected blood from more than 200 members. The written consent form spoke more broadly, of “behavioral/medical disorders”.",
+    "The samples were used in 23 papers and dissertations. Fifteen had nothing to do with diabetes; they covered schizophrenia, inbreeding and the tribe’s origins. One suggested its ancestors came from Asia, while the tribe’s own history says they began in the canyon. ASU’s researchers say these studies belonged to the same research into the causes of the tribe’s health problems: the lead researcher told the court that donors were read a script naming diabetes, schizophrenia and depression, and the part genes may play. Tribal council member Carletta Tilousi said: “people got degrees and grants, and they never asked our permission.”",
     "The lead researcher defended the work as ethical: science often advances through studies not tied to one disease. In 2010, ASU’s governing board settled. It paid $700,000 to 41 tribe members, returned the samples and apologised. No court ever ruled on whether the research broke the law. The blood went home. The published papers did not.",
 ]
 CLV = [
@@ -62,6 +62,39 @@ def build_header():
 # =====================================================================================
 # STORY 1 · SEVENTY THOUSAND SEEDS (Victorian template)
 # =====================================================================================
+def rubber_route_svg():
+    """Seed and seedling routes drawn over the 1897 Berghaus map (2300 x 1400 px, Mercator)."""
+    import math
+    X0, SC, YEQ = 612/0.6087, 6.1/0.6087, 578/0.6087
+    K = SC*180/math.pi
+    xy = lambda lo, la: (X0 + SC*lo, YEQ - K*math.log(math.tan(math.pi/4 + math.radians(la)/2)))
+    def path(pts):
+        P = [xy(*p) for p in pts]
+        d = f"M{P[0][0]:.1f} {P[0][1]:.1f}"
+        for i in range(len(P)-1):
+            p0 = P[i-1] if i else P[i]; p1, p2 = P[i], P[i+1]; p3 = P[i+2] if i+2 < len(P) else p2
+            c1 = (p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6); c2 = (p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6)
+            d += f" C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}"
+        return d
+    seeds = path([(-54.7,-2.44),(-52.5,-1.9),(-50.5,-1.2),(-48.5,-1.45),(-44,2),(-37,11),(-29,23),(-21,35),(-13,44.5),(-7.5,49.5),(-5.6,52),(-3.0,53.4),(-0.29,51.48)])
+    seedl = path([(-0.29,51.48),(-2.5,50.1),(-6.5,47.3),(-10,41),(-7.5,36.4),(-3,36.2),(5,37.6),(15,35.5),(25,33.6),(32.3,31.3),(32.6,29.6),(36,24),(41,16),(43.4,12.7),(48,12.2),(57,11),(70,8.2),(79.86,6.93)])
+    seedl2 = path([(79.86,6.93),(85,5.8),(93,6),(98,5.2),(100.5,2.9),(103.8,1.35)])
+    stops = [(1,"Tapajós river",(-54.7,-2.44),(-60,-18,"end")),(2,"Belém",(-48.5,-1.45),(40,-30,"start")),(3,"Liverpool",(-3.0,53.4),(-34,-14,"end")),
+             (4,"Kew Gardens",(-0.29,51.48),(36,28,"start")),(5,"Ceylon",(79.86,6.93),(-40,50,"end")),(6,"Malaya",(103.8,1.35),(-30,62,"end"))]
+    halo = 'stroke="#f6efde" stroke-opacity=".85" stroke-linecap="round" stroke-linejoin="round" fill="none"'
+    out = [f'<svg viewBox="0 0 2300 1400" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%">',
+           f'<path d="{seeds}" {halo} stroke-width="20"/><path d="{seedl}" {halo} stroke-width="20"/><path d="{seedl2}" {halo} stroke-width="20"/>',
+           f'<path d="{seeds}" fill="none" stroke="#9b3b22" stroke-width="9" stroke-dasharray="26 16" stroke-linecap="round"/>',
+           f'<path d="{seedl}" fill="none" stroke="{GRN}" stroke-width="9" stroke-linecap="round"/><path d="{seedl2}" fill="none" stroke="{GRN}" stroke-width="9" stroke-linecap="round"/>']
+    for n, name, ll, (dx, dy, anc) in stops:
+        x, y = xy(*ll); col = "#9b3b22" if n <= 3 else GRN
+        out.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="22" fill="{col}" stroke="#f6efde" stroke-width="5"/>'
+                   f'<text x="{x:.1f}" y="{y+9:.1f}" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="26" fill="#f6efde">{n}</text>'
+                   f'<text x="{x+dx:.1f}" y="{y+dy:.1f}" text-anchor="{anc}" font-family="Unna,Georgia,serif" font-weight="700" font-size="40" fill="#2b2117" stroke="#f6efde" stroke-width="10" paint-order="stroke" stroke-linejoin="round">{name}</text>')
+    out.append('</svg>')
+    return "".join(out)
+
+
 def build_rubber():
     F = CASE["r"]
     frame = f'<div style="position:absolute;inset:4.5mm;border:.5mm solid {GRN};pointer-events:none"></div>'
@@ -123,13 +156,13 @@ def build_rubber():
       <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:.4mm solid {GRN};padding-bottom:1mm">
         <div style="font-size:9pt;letter-spacing:2.5pt;text-transform:uppercase;color:{BRN}">Brazil’s verdict</div><div style="font-family:'Diplomata SC',Georgia,serif;color:{GRN};font-size:13pt">2009</div></div>
       <div style="display:flex;gap:4mm;margin-top:3mm">
-        <div style="width:84mm;flex:none;display:flex;flex-direction:column;gap:2.5mm">
+        <div style="width:93mm;flex:none;display:flex;flex-direction:column;gap:2.5mm">
           {clip('fap_title.png')}
-          <div style="position:relative">{clip('fap_col.png')}<div style="position:absolute;left:1.5mm;right:1.5mm;top:1.5mm;bottom:1.5mm">{hl(3.5,71.0,93.3,16.5)}{hl(3.5,87.7,69.3,5.4)}</div></div></div>
-        <div style="flex:1;display:flex;flex-direction:column;gap:3mm">
-          {clip('fap_photo.png', 'height:52mm;object-fit:cover;object-position:top')}
-          <div style="font-size:8.5pt;font-weight:700;letter-spacing:1.5pt;text-transform:uppercase;color:{BRN}">In English</div>
-          <div style="font-size:11pt;line-height:1.35;border-left:1.2mm solid {GRN};padding-left:3mm">“For decades there were discussions, with no satisfactory conclusion being reached, as to whether he behaved like a common thief or whether he was a ‘man of his time’; either way, he earned the moniker ‘the father of bio-piracy’.”</div>
+          <div style="position:relative">{clip('fap_col.png')}<div style="position:absolute;left:1.5mm;right:1.5mm;top:1.5mm;bottom:1.5mm">{hl(1.0,64.5,97.6,18.2)}{hl(1.0,82.2,70.0,6.1)}</div></div></div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:2.5mm;min-width:0">
+          <div style="width:57mm">{clip('fap_photo.png')}</div>
+          <div style="font-size:8.5pt;font-weight:700;letter-spacing:1.5pt;text-transform:uppercase;color:{BRN};margin-top:1mm">In English</div>
+          <div style="font-size:10.5pt;line-height:1.35;border-left:1.2mm solid {GRN};padding-left:3mm">“For decades there were discussions, with no satisfactory conclusion being reached, as to whether he behaved like a common thief or whether he was a ‘man of his time’; either way, he earned the moniker ‘the father of bio-piracy’.”</div>
           <div style="font-size:8pt;font-style:italic;color:{BRN}">Translation from the magazine’s own English edition. The Portuguese says <i>justo ou injusto</i>: ‘fair or unfair’.</div></div></div>
       <div style="margin-top:auto">{label("“As sementes da discórdia” (The seeds of discord)",
             "April 2009 · <i>Pesquisa FAPESP</i> no. 158, pp. 22–25, Brazil · Extract in Portuguese, with English",
@@ -138,18 +171,25 @@ def build_rubber():
         <div class="credit" style="margin-top:1.5mm">Pages: Carlos Haag, Pesquisa FAPESP (revistapesquisa.fapesp.br), CC BY-NC-ND. The full article is on the desk.</div></div></div>"""
     doc("BOARD_R4_Brazils-verdict_Pesquisa-FAPESP-2009_185x190mm", F, 185, 190, body)
 
-    # R5 · Map: a real (unmarked) world map; the route is drawn on by hand
+    # R5 · Map: a real 1897 world map with the seed and seedling routes drawn over it
     body = f"""<div style="position:absolute;inset:0;background:{VIC_BG};color:{VINK};font-family:{UNNA};padding:5mm 6mm;display:flex;flex-direction:column">
       <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.5mm">
         <div style="font-family:'Diplomata SC',Georgia,serif;color:{GRN};font-size:14pt">From the Tapajós to Asia</div>
         <div style="font-size:10pt;font-style:italic;color:{BRN}">1876 to the 1890s</div></div>
-      <img src="{u(A/'worldmap_1897_rubber.jpg')}" style="width:100%;flex:1;min-height:0;object-fit:cover;border:.4mm solid {GRN}">
+      <div style="position:relative;flex:1;min-height:0;border:.4mm solid {GRN};overflow:hidden">
+        <img src="{u(A/'worldmap_1897_rubber.jpg')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        {rubber_route_svg()}
+        <div style="position:absolute;right:4mm;bottom:4mm;background:rgba(246,239,222,.94);border:.35mm solid {GRN};padding:3mm 4mm;font-size:11pt;line-height:1.45;box-shadow:0 .6mm 2mm rgba(0,0,0,.25)">
+          <div style="font-family:'Diplomata SC',Georgia,serif;font-size:9pt;color:{GRN};margin-bottom:1.2mm">The route</div>
+          <div style="display:flex;align-items:center;gap:3mm"><svg width="16mm" height="3mm" viewBox="0 0 64 12"><line x1="2" y1="6" x2="62" y2="6" stroke="#9b3b22" stroke-width="4" stroke-dasharray="10 6"/></svg><span><b>Seeds, 1876</b> · ① Tapajós → ② Belém → ③ Liverpool → ④ Kew</span></div>
+          <div style="display:flex;align-items:center;gap:3mm"><svg width="16mm" height="3mm" viewBox="0 0 64 12"><line x1="2" y1="6" x2="62" y2="6" stroke="{GRN}" stroke-width="4"/></svg><span><b>Seedlings, from 1876</b> · ④ Kew → ⑤ Ceylon → ⑥ Malaya</span></div>
+          <div style="font-size:8.5pt;font-style:italic;color:{BRN};margin-top:1mm">Route drawn for this exhibition on a world map printed in 1897.</div></div></div>
       <div class="credit" style="margin-top:1.5mm">Map: Hermann Berghaus, <i>Chart of the World on Mercator’s Projection</i> (Gotha: Justus Perthes, 1897), detail. Public domain, via Wikimedia Commons.</div></div>"""
     doc("BOARD_R5_map_Tapajos-to-Asia_Berghaus-1897_297x210mm", F, 297, 210, body)
 
     body = f"""<div style="position:absolute;inset:0;background:{VIC_BG};border-top:3.5mm solid {GRN};padding:5mm;font-family:{UNNA};color:{VINK}">
       {label("From the Tapajós to Asia (map)", "1876 to the 1890s · Map printed 1897",
-             "The seeds’ route: the Tapajós river, Belém, Liverpool, Kew Gardens, then Ceylon and Malaya. The route is drawn by hand on a world map of the time.",
+             "The seeds’ route: the Tapajós river, Belém, Liverpool, Kew Gardens, then Ceylon and Malaya. The route is drawn over a world map of the time.",
              mcolor=BRN, tsize=14, dsize=12.5)}</div>"""
     doc("BOARD_R6_map-label_72x110mm", F, 72, 110, body)
     qr_panel("BOARD_R7_QR-audio_72x86mm", F, "08_Seventy_Thousand_Seeds.png", 72, 86, bg=GRN, fg="#f1e8d4", accent="#e2b98a",
@@ -161,6 +201,7 @@ def build_rubber():
               bg="#f6efdf", color=VINK, mcolor=BRN, font=UNNA, rule=GRN)
     OS = F / "original-sources"
     copy_pdf(OS / "Pesquisa-FAPESP_158_2009-04_As-sementes-da-discordia_pp22-25.pdf", F / "DESK_R10_magazine_Pesquisa-FAPESP-2009_As-sementes-da-discordia_pp22-25.pdf")
+    copy_pdf(OS / "Pesquisa-FAPESP_158_2009-04_The-seeds-of-discord_ENGLISH-web-edition.pdf", F / "DESK_R10_magazine_Pesquisa-FAPESP-2009_The-seeds-of-discord_ENGLISH.pdf")
     copy_pdf(OS / "London-Gazette_1920-06-04_issue-31931-supplement_pp6313-6315_Wickham-knighthood.pdf", F / "DESK_R11_government-document_London-Gazette-1920_pp6313-6315.pdf")
 
 
@@ -203,17 +244,17 @@ def build_havasupai():
             ("data", "DATA", "Copied, shared, analysed"), ("pin", "ANCESTRY", "A claim about where a people came from")]
     steps = "".join(f"""<div style="display:flex;align-items:center;gap:4mm"><div style="width:24mm;height:24mm;border-radius:50%;background:#efe6cc;display:flex;align-items:center;justify-content:center;flex:none">{flow_icon(k)}</div>
         <div><div style="font-family:'League Spartan';font-weight:700;font-size:18pt">{t}</div><div style="font-size:12pt;color:{SMUTE};font-weight:600;line-height:1.25">{d}</div></div></div>
-        {'<div style="padding-left:9mm;font-size:9pt;color:'+SMUTE+'">▼</div>' if i < 3 else ''}""" for i, (k, t, d) in enumerate(flow))
+        {'<div style="width:24mm;display:flex;justify-content:center;margin:-1mm 0"><svg width="9mm" height="11mm" viewBox="0 0 9 11"><line x1="4.5" y1=".5" x2="4.5" y2="6.6" stroke="'+SINK+'" stroke-width=".9" stroke-linecap="round"/><path d="M.9 5.6 L4.5 10.4 L8.1 5.6 Z" fill="'+SINK+'"/></svg></div>' if i < 3 else ''}""" for i, (k, t, d) in enumerate(flow))
     waffle = "".join(f'<div style="width:13.5mm;height:13.5mm;border-radius:1mm;background:{KHAKI if i < 8 else SINK}"></div>' for i in range(23))
     body = f"""<div style="position:absolute;inset:0;background:{SCOUT};color:{SINK};font-family:{MONT};padding:9mm 9mm 7mm;display:flex;flex-direction:column">
       <div style="font-weight:700;font-size:8pt;letter-spacing:2pt;text-transform:uppercase;color:{SMUTE}">Diagram</div>
       <div style="font-family:'League Spartan';font-weight:700;font-size:22pt;line-height:1.05;margin:1mm 0 7mm">FROM BLOOD<br>TO ANCESTRY</div>
-      <div style="display:flex;flex-direction:column;gap:3.5mm">{steps}</div>
+      <div style="display:flex;flex-direction:column;gap:2.5mm">{steps}</div>
       <div style="border-top:.4mm solid {KHAKI};margin-top:7mm;padding-top:4mm;font-family:'League Spartan';font-weight:700;font-size:15pt">23 PAPERS &amp; DISSERTATIONS</div>
       <div style="display:grid;grid-template-columns:repeat(8,13.5mm);gap:2.3mm;margin-top:3mm">{waffle}</div>
       <div style="font-size:12pt;margin-top:3mm;line-height:1.5"><span style="display:inline-block;width:3mm;height:3mm;background:{KHAKI};vertical-align:middle"></span> 8 on diabetes<br>
         <span style="display:inline-block;width:3mm;height:3mm;background:{SINK};vertical-align:middle"></span> 15 on schizophrenia, inbreeding or the tribe’s origins</div>
-      <div style="margin-top:auto">{label("From blood to ancestry (diagram)", "Made for this exhibition",
+      <div style="margin-top:auto;padding-top:5mm">{label("From blood to ancestry (diagram)", "Made for this exhibition",
             "Blood becomes DNA, DNA becomes data, and data can answer questions no one asked when the blood was given.", mcolor=SMUTE, tsize=13, dsize=11.5)}</div></div>"""
     doc("BOARD_H2_diagram_From-Blood-to-Ancestry_155x297mm", F, 155, 297, body)
 
