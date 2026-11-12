@@ -594,12 +594,60 @@ def build_benin():
     doc("DESK_B11_object-label_replica-plaque_200x52mm", F, 200, 52, body)
 
 
+def benin_route_svg():
+    """Movements of the Benin objects drawn over the 1897 Berghaus map detail (1420 x 900 px, Mercator)."""
+    import math
+    SC = 10.4; X0 = 880 + SC*0.1; K = SC*180/math.pi
+    YEQ = 262 + K*math.log(math.tan(math.pi/4 + math.radians(51.5)/2))
+    xy = lambda lo, la: (X0 + SC*lo, YEQ - K*math.log(math.tan(math.pi/4 + math.radians(la)/2)))
+    def path(pts):
+        P = [xy(*p) for p in pts]
+        d = f"M{P[0][0]:.1f} {P[0][1]:.1f}"
+        for i in range(len(P)-1):
+            p0 = P[i-1] if i else P[i]; p1, p2 = P[i], P[i+1]; p3 = P[i+2] if i+2 < len(P) else p2
+            c1 = (p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6); c2 = (p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6)
+            d += f" C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}"
+        return d
+    RED, BRN, GRN = "#9b3b22", "#5b3a1e", "#2f5d46"
+    taken = path([(5.62,6.34),(3.5,4.6),(-3,4.4),(-11,5.5),(-19,11),(-22,18),(-20,26),(-15,33),(-11.5,40),(-8.5,45.5),(-5.5,48.6),(-1.5,50.3),(-0.13,51.5)])
+    to_ny = path([(-0.13,51.5),(-8,51.2),(-25,50),(-45,46.5),(-62,43),(-74,40.7)])
+    to_dc = path([(-0.13,51.5),(-9,50.4),(-27,47.5),(-47,43),(-64,39.5),(-77,38.9)])
+    to_eu = path([(-0.13,51.5),(4,52.2),(9,52.5)])
+    back = path([(-77,38.9),(-62,31),(-45,20),(-28,8),(-12,0.5),(1,1.2),(5.62,6.34)])
+    halo = 'fill="none" stroke="#f4efe6" stroke-opacity=".85" stroke-linecap="round" stroke-linejoin="round" stroke-width="15"'
+    line = lambda d, c, extra="": f'<path d="{d}" fill="none" stroke="{c}" stroke-width="6.5" stroke-linecap="round" {extra}/>'
+    o = ['<svg viewBox="0 0 1420 900" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%">',
+         '<defs><marker id="bh" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker>'
+         f'<marker id="bhb" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="{BRN}"/></marker>'
+         f'<marker id="bhr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="{RED}"/></marker>'
+         f'<marker id="bhg" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="{GRN}"/></marker></defs>']
+    for d in (taken, to_ny, to_dc, to_eu, back): o.append(f'<path d="{d}" {halo}/>')
+    o += [line(back, GRN, 'stroke-dasharray="2 13" marker-end="url(#bhg)"'),
+          line(taken, RED, 'stroke-dasharray="18 11" marker-end="url(#bhr)"'),
+          line(to_ny, BRN, 'marker-end="url(#bhb)"'), line(to_dc, BRN, 'marker-end="url(#bhb)"'), line(to_eu, BRN, 'marker-end="url(#bhb)"')]
+    lab = lambda x, y, t, anc="start", sz=30: (f'<text x="{x:.1f}" y="{y:.1f}" text-anchor="{anc}" font-family="Noticia Text,Georgia,serif" font-weight="700" font-size="{sz}" '
+                                              f'fill="#2e2118" stroke="#f4efe6" stroke-width="8" paint-order="stroke" stroke-linejoin="round">{t}</text>')
+    for n, ll, col, (dx, dy, anc, t) in [(1,(5.62,6.34),RED,(26,-14,"start","Benin City")),(2,(-0.13,51.5),RED,(-24,-22,"end","London")),
+                                         (3,(-74,40.7),BRN,(22,-16,"start","New York")),(4,(-77,38.9),BRN,(22,34,"start","Washington"))]:
+        x, y = xy(*ll)
+        o.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="16" fill="{col}" stroke="#f4efe6" stroke-width="4"/>'
+                 f'<text x="{x:.1f}" y="{y+7:.1f}" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="20" fill="#f4efe6">{n}</text>' + lab(x+dx, y+dy, t, anc))
+    ex, ey = xy(9.5, 52.5); o.append(lab(ex+14, ey+8, "Europe", "start", 26))
+    o.append('</svg>')
+    return "".join(o)
+
+
 def build_map(F):
     body = f"""<div style="position:absolute;inset:0;background:{ARC};padding:4.5mm 5.5mm;font-family:'Noticia Text',Georgia,serif;color:#2e2118;display:flex;flex-direction:column">
       <div style="font-size:13pt;font-weight:700;margin-bottom:2mm">From Benin City to the world</div>
-      <img src="{u(ASSETS/'worldmap_1897_atlantic.jpg')}" style="width:100%;height:100mm;object-fit:cover;border:.3mm solid #b39b7e">
+      <div style="position:relative;width:100%;height:100mm;border:.3mm solid #b39b7e;overflow:hidden">
+        <img src="{u(ASSETS/'worldmap_1897_atlantic.jpg')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">{benin_route_svg()}</div>
+      <div style="margin-top:2.5mm;font-size:9pt;line-height:1.5">
+        <div style="display:flex;align-items:center;gap:2.5mm"><svg width="13mm" height="2.6mm" viewBox="0 0 52 10"><line x1="2" y1="5" x2="50" y2="5" stroke="#9b3b22" stroke-width="3.5" stroke-dasharray="9 5"/></svg><span><b>1897</b> · Taken from ① Benin City to ② London, where many were auctioned</span></div>
+        <div style="display:flex;align-items:center;gap:2.5mm"><svg width="13mm" height="2.6mm" viewBox="0 0 52 10"><line x1="2" y1="5" x2="50" y2="5" stroke="#5b3a1e" stroke-width="3.5"/></svg><span><b>After 1897</b> · Sold on to collections in Europe and North America, among them ③ the Met and ④ the Smithsonian</span></div>
+        <div style="display:flex;align-items:center;gap:2.5mm"><svg width="13mm" height="2.6mm" viewBox="0 0 52 10"><line x1="2" y1="5" x2="50" y2="5" stroke="#2f5d46" stroke-width="3.5" stroke-dasharray="1.5 5" stroke-linecap="round"/></svg><span><b>2022</b> · The Smithsonian transfers ownership of 29 objects back to Nigeria</span></div></div>
       <div style="margin-top:3mm">{label("From Benin City to the world (map)","Map: Hermann Berghaus, <i>Chart of the World on Mercator’s Projection</i>, Gotha: Justus Perthes, 1897 · Detail",
-            "A world map printed in the year of the raid. Objects taken from Benin City were auctioned in London and passed to collections across Europe and North America. More than a century later, most of them are still outside Nigeria.",
+            "A world map printed in the year of the raid, with the objects’ journeys drawn on for this exhibition. Objects taken from Benin City were auctioned in London and passed to collections across Europe and North America. More than a century later, most of them are still outside Nigeria.",
             mcolor="#7a4e26", tsize=11, dsize=9.2)}</div>
       <div class="credit" style="margin-top:auto">Map: public domain, via Wikimedia Commons (from Barry Lawrence Ruderman Antique Maps).</div></div>"""
     doc("BOARD_B4_map_Benin-City-to-the-world_169x174mm", F, 169, 174, body)

@@ -159,7 +159,7 @@ Exhibit_Documents/
 | `BOARD_B1_wall-text_…` | board | Case text |
 | `BOARD_B2_chain-of-hands-diagram_…` | board | Diagram |
 | `BOARD_B3_plaque-image_Met-1990.332_…` | board | Real plaque photo |
-| `BOARD_B4_map_…` | board | **Real 1897 world map** (detail), unmarked so the team can add routes by hand |
+| `BOARD_B4_map_…` | board | **Real 1897 world map** (detail) with the objects' movements printed over it: 1897 Benin City → London (auction); sold on to collections in Europe and North America (the Met, New York; the Smithsonian, Washington); 2022 Smithsonian transfer of 29 objects to Nigeria. Places are only those named in this case's own texts; sea lanes are schematic. |
 | `BOARD_B5_news-clippings_2022-2023_…` | board | Clippings (top of each article) of the three real news articles |
 | `BOARD_B6_QR-audio-strip_…` | board | QR 06 |
 | `BOARD-OR-DESK_B7_government-document_London-Gazette_1897-05-07_A4` | **desk recommended** (the board has no A4 slot) | **The official 1897 account** |
