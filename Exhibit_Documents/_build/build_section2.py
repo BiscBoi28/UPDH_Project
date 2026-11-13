@@ -196,8 +196,8 @@ def build_rubber():
              font=UNNA, line1="Listen &amp; see the sources", line2="Audio guide · Story 1", qr_mm=46)
 
     # Desk
-    tent_card("DESK_R9_tent-card_rubber-seed_100x120mm-fold", F, "Seed of the Pará rubber tree (<i>Hevea brasiliensis</i>)", "Present day · Real seed",
-              "A seed of the Pará rubber tree, like the 70,000 Wickham shipped from the Amazon in 1876.",
+    tent_card("DESK_R9_tent-card_rubber-seed_100x120mm-fold", F, "Seed of the Pará rubber tree (<i>Hevea brasiliensis</i>)", "Present day · Reproduction of a seed",
+              "A reproduction of a seed of the Pará rubber tree, like the 70,000 Wickham shipped from the Amazon in 1876.",
               bg="#f6efdf", color=VINK, mcolor=BRN, font=UNNA, rule=GRN)
     OS = F / "original-sources"
     copy_pdf(OS / "Pesquisa-FAPESP_158_2009-04_As-sementes-da-discordia_pp22-25.pdf", F / "DESK_R10_magazine_Pesquisa-FAPESP-2009_As-sementes-da-discordia_pp22-25.pdf")
@@ -319,8 +319,8 @@ def build_havasupai():
              font=MONT, line1="Listen &amp; see the sources", line2="Audio guide · Story 2 · What the Blood Was For", qr_mm=46)
 
     # Desk
-    tent_card("DESK_H9_tent-card_blood-collection-tube_100x120mm-fold", F, "Blood-collection tube", "Present day · Unused demonstration object",
-              "An unused, empty tube; no Havasupai blood, image or genetic information is shown in this exhibition.",
+    tent_card("DESK_H9_tent-card_lab-equipment_100x120mm-fold", F, "Laboratory equipment", "Present day · Microscope, slides and an iodine bottle",
+              "Ordinary lab tools, standing in for the laboratories where the blood samples were studied. No Havasupai blood, image or genetic information is shown in this exhibition.",
               bg=SCOUT, color=SINK, mcolor=SMUTE, font=MONT, rule=KHAKI)
     OS = F / "original-sources"
     copy_pdf(OS / "ABOR-Havasupai_press-release_2010-04-21.pdf", F / "DESK_H10_press-release_Havasupai-Tribe-and-ABOR_2010-04-21.pdf")
@@ -383,7 +383,7 @@ def build_clearview():
             "Canada’s privacy commissioners described each Clearview faceprint as a ‘vector’ of 512 data points.", mcolor=RUST, tsize=12.5, dsize=11)}</div></div>"""
     doc("BOARD_C2_faceprint_A-Face-as-Numbers_155x297mm", F, 155, 297, body)
 
-    # C3 · One face, four places: stills from the exhibition's own video (staged, consenting volunteer)
+    # C3 · One face, four places: photographs by August de Richelieu (also used in the face-search video)
     posts = [("card1.png", "A. A friend’s post: she is beside the friend", "Public post"), ("card2.png", "B. “Best coffee spots this winter”", "Public post"),
              ("card3.png", "C. Her own post", "Public post"), ("street_c.png", "D. The photo that gets searched", "Not posted anywhere")]
     cells = "".join(f"""<div style="flex:1;display:flex;flex-direction:column;gap:2mm">
@@ -392,9 +392,9 @@ def build_clearview():
         <div style="font-size:12.5pt;line-height:1.25">{cap}</div></div>""" for f, cap, tag in posts)
     body = f"""<div style="position:absolute;inset:0;background:{FEED};color:{FINK};font-family:{DMS};padding:5mm 7mm;display:flex;flex-direction:column">
       <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-family:Poppins;font-weight:700;font-size:16pt">One face, four places</div>
-        <div style="font-size:10pt;color:{RUST}">Staged photographs · 2026 · Made for this exhibition with a consenting volunteer</div></div>
+        <div style="font-size:10pt;color:{RUST}">Photographs: August de Richelieu</div></div>
       <div style="display:flex;gap:4mm;margin-top:3mm">{cells}</div>
-      <div style="font-size:11pt;margin-top:auto;color:#5b3422">One volunteer in four settings, each photo shared with a different audience. The same stills appear in the face-search video on the desk.</div></div>"""
+      <div style="font-size:11pt;margin-top:auto;color:#5b3422">One woman in four settings, each photo shared with a different audience. The same stills appear in the face-search video on the desk.</div></div>"""
     doc("BOARD_C3_photos_One-Face-Four-Places_380x134mm", F, 380, 134, body)
 
     steps = [("01", "POSTED", "Visible online"), ("02", "COLLECTED", "Copied by Clearview"), ("03", "FACE DATA", "Turned into a faceprint"), ("04", "SEARCHABLE", "Found from a new photo")]
@@ -439,7 +439,7 @@ def build_clearview():
 
     # Desk
     object_labels("DESK_C9_object-label_face-search-simulation_200x56mm", F, [("Face search (simulation)",
-                  "Video, 32-second loop · Made for this exhibition · Not Clearview software",
+                  "Video, 32-second loop · Made for this exhibition · Photographs: August de Richelieu · Not Clearview software",
                   "A simulation built by the exhibition team, not Clearview software: one new photo finds the same face in three earlier posts.")],
                   bg=FEED, color=FINK, mcolor=RUST, font=DMS, rule=RUST)
     side = lambda kick, big, txt, bg: f"""<div style="flex:1;background:{bg};padding:6mm 8mm"><div style="font-family:Poppins;font-weight:700;font-size:8pt;letter-spacing:1pt;color:{RUST}">{kick}</div>

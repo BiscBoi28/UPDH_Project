@@ -221,7 +221,7 @@ Layout source: `Section2_Full_Layout/section2_layout.html` (tags R1–R12, H1–
 
 **Map (R5).** The same Berghaus 1897 world map as Section 1, cropped from Brazil to Malaya. The route is printed over it (revised 12 Nov 2026): seeds, 1876, Tapajós (Santarém) → Belém → Liverpool → Kew, dashed; seedlings from 1876, Kew → Ceylon → Malaya (Singapore), solid. Stops are placed by latitude and longitude on the map's Mercator grid. The sea lanes are drawn schematically (the Kew–Ceylon line runs through Suez); the legend names only the stops.
 
-**Made for the exhibition.** R1 (wall text), R2 (timeline drawn to scale), R6 (map label), R9 (seed tent card).
+**Made for the exhibition.** R1 (wall text), R2 (timeline drawn to scale), R6 (map label), R9 (tent card for the seed reproduction).
 
 ### 02 · What the Blood Was For (Havasupai)
 
@@ -249,7 +249,7 @@ Layout source: `Section2_Full_Layout/section2_layout.html` (tags R1–R12, H1–
 - Captured with `capture_article.mjs`; the site footer was cut.
 - The NBC News copy of the NYT report ("Tribe wins fight over research on its DNA") rendered blank in headless Chrome, so it was dropped.
 
-**Made for the exhibition.** H1 (wall text), H2 (diagram), the three "versions" cards in H3, the H5 checklist, H9 (tent card).
+**Made for the exhibition.** H1 (wall text), H2 (diagram), the three "versions" cards in H3, the H5 checklist, H9 (tent card for the lab equipment: microscope, slides, iodine bottle).
 
 ### 03 · A Search Engine for Faces (Clearview AI)
 
@@ -263,7 +263,8 @@ Layout source: `Section2_Full_Layout/section2_layout.html` (tags R1–R12, H1–
 - Captured; it backs the €30.5 million line in C6. TechCrunch was tried, but it redirected to a different article, so it was dropped.
 
 **Photos (C3).** Stills from the exhibition's own video `Actual_Audio_Guide/Video/Clearview_Face_Search_Narrated.mp4`, at 4 s (the three posts) and 19.6 s (the street photo), taken with `ffmpeg`.
-- These are the "same photos used in the video", as the mock-up asked: staged, with a consenting volunteer, on fictional `.example` sites.
+- These are the "same photos used in the video", as the mock-up asked, shown on fictional `.example` sites.
+- Photographer: August de Richelieu, credited on C3 and on the face-search video label (desk C9) as "Photographs: August de Richelieu".
 
 **Made for the exhibition.** C1 (wall text), C2 (faceprint, illustrative numbers), C4 (pipeline), C6 (rulings table), C9 (label), C13 (card).
 
