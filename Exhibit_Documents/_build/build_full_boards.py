@@ -35,7 +35,7 @@ TITLES = {1: "Who Is the Thief?", 2: "What Can Be Taken?", 3: "Who Names the Act
 DIVIDERS = {3: [(30.0, 32.4, 72.0), (89.75, 32.4, 72.0)]}
 
 WALL_W, WALL_H, FRAME = 120.0, 90.0, 0.9          # cm
-PAPERS = {"A1": (841, 594), "A2": (594, 420), "A3": (420, 297)}     # landscape, mm
+PAPERS = {"A0": (1189, 841), "A1": (841, 594), "A2": (594, 420), "A3": (420, 297)}     # landscape, mm
 
 
 def board_files(sec):
@@ -132,7 +132,9 @@ def build(sec, paper):
 
 if __name__ == "__main__":
     import sys
-    papers = sys.argv[1:] or list(PAPERS)            # e.g. `python3 build_full_boards.py A1`
-    for s in (1, 2, 3):
+    # e.g. `python3 build_full_boards.py A1` or `python3 build_full_boards.py 3` (section 3, all sizes)
+    papers = [a for a in sys.argv[1:] if a in PAPERS] or list(PAPERS)
+    sections = [int(a) for a in sys.argv[1:] if a in ("1", "2", "3")] or [1, 2, 3]
+    for s in sections:
         for paper in papers:
             build(s, paper)

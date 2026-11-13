@@ -589,9 +589,33 @@ def build_benin():
       </div></div>"""
     doc("BOARD-OR-DESK_B7_government-document_London-Gazette_1897-05-07_A4", F, 210, 297, body)
 
-    body = f"""<div style="position:absolute;inset:0;background:{ARC};border-top:2.5mm solid #7a4e26;padding:4mm 7mm;font-family:'Noticia Text',Georgia,serif;color:#2e2118">
-      {label("Handmade plaque (replica)","Made for this exhibition · Not an original","A copy made by the exhibition team, so visitors can see a plaque’s size and depth of relief. The plaque in the photograph on the wall is about 48 × 38 cm.", mcolor="#7a4e26", tsize=14, dsize=12)}</div>"""
-    doc("DESK_B11_object-label_replica-plaque_200x52mm", F, 200, 52, body)
+    # Desk photo prints of four more palace plaques (The Met, Open Access / CC0). B11 is the large one.
+    def plaque_print(name, w, h, img, title, meta, desc, credit, img_h):
+        body = f"""<div style="position:absolute;inset:0;background:{ARC};border-top:2.5mm solid #7a4e26;padding:7mm 8mm 6mm;font-family:'Noticia Text',Georgia,serif;color:#2e2118;display:flex;flex-direction:column">
+          <div style="font-family:Montserrat;font-weight:700;font-size:8pt;letter-spacing:1.5pt;text-transform:uppercase;color:#7a4e26;margin-bottom:3mm">Photograph · Benin palace plaque</div>
+          <div style="height:{img_h}mm;background:#e9e2d6;display:flex;align-items:center;justify-content:center;overflow:hidden">
+            <img src="{u(ASSETS/img)}" style="max-width:100%;max-height:100%;object-fit:contain"></div>
+          <div style="margin-top:4mm">{label(title, meta, desc, mcolor="#7a4e26", tsize=13 if w > 160 else 11.5, dsize=11 if w > 160 else 9.8)}</div>
+          <div class="credit" style="margin-top:auto">{credit}</div></div>"""
+        doc(name, F, w, h, body)
+
+    PH = "Photograph; the original is in The Metropolitan Museum of Art, New York"
+    plaque_print("DESK_B11_photo-print_Plaque-with-equestrian-oba_Met-1978.412.309_A4", 210, 297, "plaque_oba_equestrian.jpg",
+        "Plaque with equestrian ọba (king) and attendants", f"Edo peoples, Benin, c.1540–70 · Brass, 49.5 × 41.9 cm · {PH} (1978.412.309)",
+        "The king sits on horseback at the centre, held up by attendants, with smaller figures around him. Plaques like this were fixed to the palace pillars as the court’s own record.",
+        "Image: The Met, 1978.412.309. The Michael C. Rockefeller Memorial Collection, Gift of Nelson A. Rockefeller, 1965. Open Access (CC0).", 190)
+    plaque_print("DESK_B12_photo-print_Plaque-with-two-Portuguese-merchants_Met-1991.17.18_A5", 148, 210, "plaque_portuguese_merchants.jpg",
+        "Plaque with two Portuguese merchants", f"Edo peoples, Benin, c.1540–70 · Brass, 52.1 × 28.9 cm · {PH} (1991.17.18)",
+        "Two European traders with long hair and hats. Trade with Portugal brought Benin much of the brass its casters used.",
+        "Image: The Met, 1991.17.18. Gift of Mr. and Mrs. Klaus G. Perls, 1991. Open Access (CC0).", 128)
+    plaque_print("DESK_B13_photo-print_Plaque-with-warrior-and-fish_Met-1979.206.97_A5", 148, 210, "plaque_warrior_fish.jpg",
+        "Plaque with warrior and fish", f"Edo peoples, Benin, c.1540–70 · Brass, 45.8 × 30.5 cm · {PH} (1979.206.97)",
+        "A warrior with a shield and weapon, shown at the scale of his rank. Warriors and chiefs are among the most common figures on the plaques.",
+        "Image: The Met, 1979.206.97. The Michael C. Rockefeller Memorial Collection, Bequest of Nelson A. Rockefeller, 1979. Open Access (CC0).", 128)
+    plaque_print("DESK_B14_photo-print_Plaque-with-mudfish_Met-1991.17.15_A5", 148, 210, "plaque_mudfish.jpg",
+        "Plaque with mudfish", f"Edo peoples, Benin, c.1540–70 · Brass, 34 × 17.1 cm · {PH} (1991.17.15)",
+        "The mudfish lives in water and can survive on land, and in Benin it stood for the ọba’s power in both worlds.",
+        "Image: The Met, 1991.17.15. Gift of Mr. and Mrs. Klaus G. Perls, 1991. Open Access (CC0).", 128)
 
 
 def benin_route_svg():

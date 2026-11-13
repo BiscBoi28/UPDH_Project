@@ -166,7 +166,8 @@ Exhibit_Documents/
 | `DESK_B8_news_Al-Jazeera_2022-10-12_A4` | desk | Full article, as a browser printout |
 | `DESK_B9_news_ThisDay_2023-04-13_Nigeria-gazette_A4` | desk | Full article: the Nigerian Gazette notice |
 | `DESK_B10_news_Reuters-in-The-Star_2023-05-11_A4` | desk | Full article: returns delayed by the decree |
-| `DESK_B11_object-label_replica-plaque` | desk | Label |
+| `DESK_B11_photo-print_Plaque-with-equestrian-oba_Met-1978.412.309_A4` | desk | Real plaque photo, large print |
+| `DESK_B12`–`B14_photo-print_…_A5` | desk | Real plaque photos: two Portuguese merchants, warrior and fish, mudfish |
 
 **Government document — *The London Gazette*, 7 May 1897, issue 26850**
 - This is both the government document and the incident report for this case. It prints Rear-Admiral Harry Rawson's despatches "reporting operations against the King of Benin, and the capture of Benin City" (p. 2516), with the column commander's report (pp. 2531–2532).
@@ -180,6 +181,13 @@ Exhibit_Documents/
 - On the board the photo is cropped to the brass itself so it fills the frame (no studio backdrop).
 - Found with the Met Collection API. The old `/v1/search` was retired on 2026-10-01, so `/public/collection/v1.1/search?q=Benin plaque` was used.
 - The Met's object page did not return its provenance text to a script. The label therefore does **not** state this plaque's own 1897 history; it speaks about plaques generally.
+
+**Images: desk photo prints (B11–B14).** All Edo peoples, Benin, c.1540–70, brass; The Metropolitan Museum of Art, Open Access / CC0. Found with the same `v1.1/search` query; credit lines copied from the Met API.
+- B11 · *Plaque with equestrian ọ́bà (king) and attendants*, 49.5 × 41.9 cm, 1978.412.309, The Michael C. Rockefeller Memorial Collection, Gift of Nelson A. Rockefeller, 1965. https://www.metmuseum.org/art/collection/search/310752
+- B12 · *Plaque with Two Portuguese Merchants*, 52.1 × 28.9 cm, 1991.17.18, Gift of Mr. and Mrs. Klaus G. Perls, 1991. https://www.metmuseum.org/art/collection/search/316490
+- B13 · *Plaque with Warrior and Fish*, 45.8 × 30.5 cm, 1979.206.97, The Michael C. Rockefeller Memorial Collection, Bequest of Nelson A. Rockefeller, 1979. https://www.metmuseum.org/art/collection/search/312301
+- B14 · *Plaque with mudfish*, 34 × 17.1 cm, 1991.17.15, Gift of Mr. and Mrs. Klaus G. Perls, 1991. https://www.metmuseum.org/art/collection/search/316488
+- These replace the earlier label for a handmade replica plaque; the exhibition shows photographs, not a plaque.
 
 **Map.** Hermann Berghaus, *Chart of the World on Mercator's Projection* (Gotha: Justus Perthes, **1897**), the year of the raid. Wikimedia Commons `File:1897 map of the world by Hermann Berghaus.jpg` (public domain; scan from Barry Lawrence Ruderman Antique Maps). The 6,000 px version was used, cropped to the Atlantic world (Washington DC, London, Berlin, Gulf of Guinea). No markings; the team will add routes by hand.
 

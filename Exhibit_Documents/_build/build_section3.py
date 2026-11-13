@@ -10,6 +10,11 @@ from common import (S1, ROOT, u, doc, paras, label, webprint, BUILT, ORN, use_se
                     image_pages, qr_panel, section_header, voting, object_labels)
 
 use_section(3)
+
+_label = label
+def label(title, meta, desc, *, tsize=12, dsize=10.5, **kw):
+    """Section 3 labels print about 12% larger than the shared default."""
+    return _label(title, meta, desc, tsize=round(tsize * 1.12, 1), dsize=round(dsize * 1.12, 1), **kw)
 HERE = S1.HERE
 OUT = ROOT / "section-3"
 A = HERE / "assets" / "section-3"
@@ -55,7 +60,7 @@ def case_panel(name, F, num, title, sub, ps, off, com, accent):
         <div style="flex:1;padding:6mm 10mm 0;border-bottom:.8mm solid {accent}">
           <div style="font-family:Montserrat;font-weight:700;font-size:9pt;letter-spacing:2pt;text-transform:uppercase;color:{accent}">Section 3 · Case {num} · {sub}</div>
           <div style="font-size:30pt;line-height:1.1;margin-top:3mm">{title}</div></div></div>
-      <div class="fit" style="position:absolute;left:10mm;right:10mm;top:44mm;bottom:30mm;column-count:2;column-gap:12mm;font-size:36pt;line-height:1.42;overflow:hidden">{paras(ps,'margin-bottom:.5em')}</div>
+      <div class="fit" style="position:absolute;left:10mm;right:10mm;top:40mm;bottom:24mm;column-count:2;column-gap:10mm;column-fill:auto;font-size:46pt;line-height:1.34;overflow:hidden">{paras(ps,'margin-bottom:.5em')}</div>
       <div style="position:absolute;left:10mm;right:10mm;bottom:6mm;border-top:.4mm solid #c9c2b0;padding-top:3mm;display:flex;align-items:center;gap:5mm">
         <div style="font-family:Montserrat;font-weight:700;font-size:9pt;letter-spacing:1pt;line-height:1.15;flex:none">SAME ACT,<br>TWO NAMES</div>
         <div style="flex:1">{''.join(chip(w, '#e3e7ee', SIDE_A) for w in off)}</div>
